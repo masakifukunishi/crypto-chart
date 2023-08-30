@@ -1,5 +1,5 @@
 import express from "express";
-// import chartsRoutes from "./charts.mjs";
+// import chartsRoutes from "./charts.js";
 
 const router = express.Router();
 
