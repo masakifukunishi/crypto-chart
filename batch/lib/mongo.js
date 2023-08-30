@@ -4,7 +4,7 @@ import path from "path";
 
 dotenv.config({ path: path.join(process.cwd(), ".env") });
 
-class MongoDB {
+class Mongo {
   constructor() {
     console.log(process.env.MONGODB_URI);
     this.client = new MongoClient(process.env.MONGODB_URI);
@@ -30,4 +30,4 @@ class MongoDB {
   }
 }
 
-export default MongoDB;
+export default Mongo;

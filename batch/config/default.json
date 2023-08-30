@@ -1,0 +1,11 @@
+{
+  "cryptowatch": {
+    "exchange": "binance-us",
+    "asset": "usd",
+    "currency": ["btc"],
+    "initialDataLimit": 365,
+    "period": {
+      "daily": 86400
+    }
+  }
+}
