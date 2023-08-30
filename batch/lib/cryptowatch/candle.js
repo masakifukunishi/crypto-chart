@@ -3,7 +3,7 @@ import config from "config";
 
 import Mongo from "../mongo.js";
 
-class Ohlc {
+class Candle {
   constructor() {
     const cryptoWatchConfig = config.get("cryptowatch");
     this.period = cryptoWatchConfig.period.daily;
@@ -43,4 +43,4 @@ class Ohlc {
   }
 }
 
-export default Ohlc;
+export default Candle;

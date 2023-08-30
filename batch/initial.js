@@ -1,6 +1,6 @@
 import config from "config";
 
-import Ohlc from "./lib/cryptowatch/ohlc.js";
+import Candle from "./lib/cryptowatch/candle.js";
 
 const cryptoWatchConfig = config.get("cryptowatch");
 const currencies = cryptoWatchConfig.currency;
@@ -10,7 +10,7 @@ const initialDataLimit = cryptoWatchConfig.initialDataLimit;
 
 currencies.map(async (currency) => {
   const pair = `${currency}${asset}`;
-  const ohlc = new Ohlc();
-  const data = await ohlc.get(exchange, pair, initialDataLimit);
-  ohlc.insert(data);
+  const candle = new Candle();
+  const data = await candle.get(exchange, pair, initialDataLimit);
+  candle.insert(data);
 });
