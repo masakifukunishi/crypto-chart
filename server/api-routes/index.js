@@ -1,8 +1,8 @@
 import express from "express";
-// import chartsRoutes from "./charts.js";
+import candlesRoutes from "./candles.js";
 
 const router = express.Router();
 
-// router.use("/charts", chartsRoutes);
+router.use("/candles", candlesRoutes);
 
 export default router;

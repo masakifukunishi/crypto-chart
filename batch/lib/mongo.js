@@ -6,14 +6,13 @@ dotenv.config({ path: path.join(process.cwd(), ".env") });
 
 class Mongo {
   constructor() {
-    console.log(process.env.MONGODB_URI);
     this.client = new MongoClient(process.env.MONGODB_URI);
   }
 
   async connect(collectionName, operation) {
     try {
       await this.client.connect();
-      const db = this.client.db("candles");
+      const db = this.client.db();
       const collection = db.collection(collectionName);
       return await operation(collection);
     } catch (e) {

@@ -3,16 +3,21 @@ import config from "config";
 
 import Mongo from "../mongo.js";
 
-class Ohlc {
-  constructor() {
+class Candle {
+  constructor(exchange, currency, asset, dataLimit) {
     const cryptoWatchConfig = config.get("cryptowatch");
     this.period = cryptoWatchConfig.period.daily;
+    this.mongodb = new Mongo();
+    this.exchange = exchange;
+    this.currency = currency;
+    this.asset = asset;
+    this.pair = `${this.currency}${this.asset}`;
+    this.dataLimit = dataLimit;
   }
 
-  async get(exchange, pair, dataLimit) {
-    const url = `https://api.cryptowat.ch/markets/${exchange}/${pair}/ohlc`;
+  async get() {
+    const url = `https://api.cryptowat.ch/markets/${this.exchange}/${this.pair}/ohlc`;
     console.log(url);
-
     return axios
       .get(url, {
         params: {
@@ -20,7 +25,7 @@ class Ohlc {
         },
       })
       .then((response) => {
-        const data = response.data.result[this.period].slice(0, dataLimit);
+        const data = response.data.result[this.period].slice(0, this.dataLimit);
         const formattedData = data.map((d) => {
           return {
             time: d[0],
@@ -38,9 +43,8 @@ class Ohlc {
       });
   }
   insert(data) {
-    const mongodb = new Mongo();
-    mongodb.insertMany("btc_usd", data);
+    this.mongodb.insertMany(`candles_${this.currency}_${this.asset}`, data);
   }
 }
 
-export default Ohlc;
+export default Candle;
