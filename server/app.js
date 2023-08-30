@@ -1,7 +1,7 @@
 import path from "path";
 import express from "express";
-import apiRoutes from "./api-routes/index.mjs";
-import "./helpers/db.mjs";
+import apiRoutes from "./api-routes/index.js";
+import "./helpers/db.js";
 
 const app = express();
 const port = process.env.PORT || 8080;
