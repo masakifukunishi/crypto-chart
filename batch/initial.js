@@ -9,8 +9,7 @@ const exchange = cryptoWatchConfig.exchange;
 const initialDataLimit = cryptoWatchConfig.initialDataLimit;
 
 currencies.map(async (currency) => {
-  const pair = `${currency}${asset}`;
-  const candle = new Candle();
-  const data = await candle.get(exchange, pair, initialDataLimit);
+  const candle = new Candle(exchange, currency, asset, initialDataLimit);
+  const data = await candle.get();
   candle.insert(data);
 });
