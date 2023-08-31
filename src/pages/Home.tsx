@@ -20,7 +20,8 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Home</h1>
+      <div style={{ fontWeight: "bold" }}>a</div>
+      <div className="font-bold">Crypto chart</div>
       <CandlestickChart data={ohlcv.ohlc} />
       <VolumeBarChart data={ohlcv.volume} />
     </div>
