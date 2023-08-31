@@ -5,11 +5,24 @@ export const getAllCandles = async function (req, res) {
   const CandleModel = Candle(collectionName);
   const candles = await CandleModel.find();
   // convert to chart data format
-  const formattedCandles = candles.map((candle) => {
+  const formattedOhlc = candles.map((candle) => {
     return {
       x: candle.time * 1000,
       y: [candle.open, candle.high, candle.low, candle.close],
     };
   });
+
+  const formattedVolume = candles.map((candle) => {
+    return {
+      x: candle.time * 1000,
+      y: candle.volume,
+    };
+  });
+
+  const formattedCandles = {
+    ohlc: formattedOhlc,
+    volume: formattedVolume,
+  };
+
   res.json(formattedCandles);
 };

@@ -12,11 +12,6 @@ app.use(express.json());
 
 app.use("/api", apiRoutes);
 
-app.get("/test", (req, res) => {
-  res.json({ msg: "Hello from server!" });
-  console.log("test");
-});
-
 app.get("*", (req, res) => {
   const pathIndex = path.resolve("dist", "index.html");
   res.sendFile(pathIndex);

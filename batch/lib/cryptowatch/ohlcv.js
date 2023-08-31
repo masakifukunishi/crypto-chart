@@ -3,7 +3,7 @@ import config from "config";
 
 import Mongo from "../mongo.js";
 
-class Candle {
+class Ohlcv {
   constructor(exchange, currency, asset, dataLimit) {
     const cryptoWatchConfig = config.get("cryptowatch");
     this.period = cryptoWatchConfig.period.daily;
@@ -13,13 +13,12 @@ class Candle {
     this.asset = asset;
     this.pair = `${this.currency}${this.asset}`;
     this.dataLimit = dataLimit;
+    this.url = `${cryptoWatchConfig.apiUrl}/markets/${this.exchange}/${this.pair}/ohlc`;
   }
 
   async get() {
-    const url = `https://api.cryptowat.ch/markets/${this.exchange}/${this.pair}/ohlc`;
-    console.log(url);
     return axios
-      .get(url, {
+      .get(this.url, {
         params: {
           periods: 86400,
         },
@@ -43,8 +42,8 @@ class Candle {
       });
   }
   insert(data) {
-    this.mongodb.insertMany(`candles_${this.currency}_${this.asset}`, data);
+    this.mongodb.insertMany(`ohlcv_${this.currency}_${this.asset}`, data);
   }
 }
 
-export default Candle;
+export default Ohlcv;
