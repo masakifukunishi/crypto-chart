@@ -7,7 +7,7 @@ export const getAllCandles = async function (req, res) {
   // convert to chart data format
   const formattedCandles = candles.map((candle) => {
     return {
-      x: new Date(candle.time),
+      x: candle.time * 1000,
       y: [candle.open, candle.high, candle.low, candle.close],
     };
   });

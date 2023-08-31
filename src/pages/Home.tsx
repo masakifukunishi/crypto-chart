@@ -8,10 +8,11 @@ const Home = () => {
   useEffect(() => {
     console.log("Home");
     candleApi.getAll().then((_candles) => {
-      setCandleData(_candles);
       console.log(_candles);
+      setCandleData(_candles);
     });
-
+  }, []);
+  useEffect(() => {
     const options = {
       series: [
         {
@@ -21,7 +22,7 @@ const Home = () => {
       plotOptions: {
         candlestick: {
           colors: {
-            upward: "#000",
+            upward: "#54f542",
             downward: "#EF403C",
           },
           wick: {
@@ -31,7 +32,9 @@ const Home = () => {
       },
       chart: {
         type: "candlestick",
-        height: 350,
+        height: 650,
+        background: "#1E1E1E",
+        foreColor: "#fff",
       },
       title: {
         text: "CandleStick Chart",
@@ -49,8 +52,10 @@ const Home = () => {
 
     const chart = new ApexCharts(document.querySelector("#chart"), options);
     chart.render();
-  }, []);
-
+    return () => {
+      chart.destroy();
+    };
+  }, [candleData]);
   return (
     <div>
       <h1 id="chart">Home</h1>
