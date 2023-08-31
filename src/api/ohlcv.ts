@@ -9,13 +9,13 @@ axios.interceptors.response.use(
   }
 );
 
-const ENDPOINT_URL = "/api/candles";
+const ENDPOINT_URL = "/api/ohlcv";
 
-const candleApi = {
-  async getAll() {
+const ohlcvApi = {
+  async get() {
     const result = await axios.get(ENDPOINT_URL);
     return result.data;
   },
 };
 
-export default candleApi;
+export default ohlcvApi;

@@ -1,9 +1,9 @@
 import express from "express";
 import { requestErrorHandler } from "../helpers/helper.js";
-import { getAllCandles } from "../controllers/candles.js";
+import { getOhlcv } from "../controllers/ohlcv.js";
 
 const router = express.Router();
 
-router.get("/", requestErrorHandler(getAllCandles));
+router.get("/", requestErrorHandler(getOhlcv));
 
 export default router;

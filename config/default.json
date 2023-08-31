@@ -1,6 +1,7 @@
 {
   "cryptowatch": {
-    "exchange": "binance-us",
+    "apiUrl": "https://api.cryptowat.ch",
+    "exchange": "bitflyer",
     "asset": "usd",
     "currency": ["btc"],
     "initialDataLimit": 365,

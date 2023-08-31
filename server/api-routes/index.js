@@ -1,8 +1,8 @@
 import express from "express";
-import candlesRoutes from "./candles.js";
+import ohlcvRoutes from "./ohlcv.js";
 
 const router = express.Router();
 
-router.use("/candles", candlesRoutes);
+router.use("/ohlcv", ohlcvRoutes);
 
 export default router;
