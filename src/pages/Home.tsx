@@ -81,6 +81,8 @@ const Home = () => {
           enabled: false,
           target: "candles",
         },
+        background: "#1E1E1E",
+        foreColor: "#fff",
         toolbar: {
           show: false,
         },
