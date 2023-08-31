@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const candleSchema = new Schema({
+const OhlcvSchema = new Schema({
   time: {
     type: Number,
     required: true,
@@ -27,5 +27,5 @@ const candleSchema = new Schema({
   },
 });
 
-const Candle = (collectionName) => model("Candle", candleSchema, collectionName);
-export default Candle;
+const Ohlcv = (collectionName) => model("Ohlcv", OhlcvSchema, collectionName);
+export default Ohlcv;

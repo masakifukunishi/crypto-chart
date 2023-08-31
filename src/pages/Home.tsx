@@ -1,31 +1,29 @@
 import { useState, useEffect } from "react";
 import ApexCharts from "apexcharts";
 
-import candleApi from "../api/candle";
+import ohlcvApi from "../api/ohlcv";
 
 const Home = () => {
-  const [candleData, setCandleData] = useState([]);
+  const [ohlcv, setOhlcv] = useState({ ohlc: [], volume: [] });
   useEffect(() => {
-    const fetchCandleData = async () => {
+    const fetchOhlcvData = async () => {
       try {
-        const _candles = await candleApi.getAll();
-        setCandleData(_candles);
+        const _ohlcv = await ohlcvApi.get();
+        setOhlcv(_ohlcv);
       } catch (error) {
         console.error("Error fetching candle data:", error);
       }
     };
-    fetchCandleData();
+    fetchOhlcvData();
   }, []);
 
   useEffect(() => {
-    if (candleData.length === 0) {
-      return;
-    }
+    if (ohlcv.ohlc.length === 0) return;
 
     const options = {
       series: [
         {
-          data: candleData,
+          data: ohlcv.ohlc,
         },
       ],
       plotOptions: {
@@ -40,10 +38,14 @@ const Home = () => {
         },
       },
       chart: {
+        id: "candles",
         type: "candlestick",
-        height: 650,
+        height: 450,
         background: "#1E1E1E",
         foreColor: "#fff",
+        toolbar: {
+          show: false,
+        },
       },
       xaxis: {
         type: "datetime",
@@ -52,86 +54,84 @@ const Home = () => {
         tooltip: {
           enabled: true,
         },
+        labels: {
+          minWidth: 40,
+          maxWidth: 40,
+          formatter: (val: number) => {
+            return val.toFixed(0);
+          },
+        },
       },
     };
 
     const chart = new ApexCharts(document.querySelector("#chart"), options);
     chart.render();
 
-    // const optionsBar = {
-    //   series: [
-    //     {
-    //       name: "volume",
-    //       data: [100, 2, 3, 4, 5, 60000, 7, 8, 9, 10],
-    //     },
-    //   ],
-    //   chart: {
-    //     height: 160,
-    //     type: "bar",
-    //     brush: {
-    //       enabled: true,
-    //       target: "candles",
-    //     },
-    //     selection: {
-    //       enabled: true,
-    //       xaxis: {
-    //         min: new Date("3 Sep 2022").getTime(),
-    //         max: new Date("31 Aug 2023").getTime(),
-    //       },
-    //       fill: {
-    //         color: "#ccc",
-    //         opacity: 0.4,
-    //       },
-    //       stroke: {
-    //         color: "#0D47A1",
-    //       },
-    //     },
-    //   },
-    //   dataLabels: {
-    //     enabled: false,
-    //   },
-    //   plotOptions: {
-    //     bar: {
-    //       columnWidth: "80%",
-    //       colors: {
-    //         ranges: [
-    //           {
-    //             from: -1000,
-    //             to: 0,
-    //             color: "#F15B46",
-    //           },
-    //           {
-    //             from: 1,
-    //             to: 10000,
-    //             color: "#FEB019",
-    //           },
-    //         ],
-    //       },
-    //     },
-    //   },
-    //   stroke: {
-    //     width: 0,
-    //   },
-    //   xaxis: {
-    //     type: "datetime",
-    //     axisBorder: {
-    //       offsetX: 13,
-    //     },
-    //   },
-    //   yaxis: {
-    //     labels: {
-    //       show: false,
-    //     },
-    //   },
-    // };
-    // const chartBar = new ApexCharts(document.querySelector("#chart-bar"), optionsBar);
-    // chartBar.render();
+    const optionsBar = {
+      series: [
+        {
+          name: "volume",
+          data: ohlcv.volume,
+        },
+      ],
+      chart: {
+        height: 160,
+        type: "bar",
+        brush: {
+          enabled: false,
+          target: "candles",
+        },
+        toolbar: {
+          show: false,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      plotOptions: {
+        bar: {
+          columnWidth: "80%",
+          colors: {
+            ranges: [
+              {
+                from: -1000,
+                to: 0,
+                color: "#F15B46",
+              },
+              {
+                from: 1,
+                to: 10000,
+                color: "#FEB019",
+              },
+            ],
+          },
+        },
+      },
+      stroke: {
+        width: 0,
+      },
+      xaxis: {
+        type: "datetime",
+      },
+      yaxis: {
+        labels: {
+          minWidth: 40,
+          maxWidth: 40,
+          formatter: (val: number) => {
+            return val.toFixed(0);
+          },
+        },
+      },
+    };
+    console.log(ohlcv.volume);
+    const chartBar = new ApexCharts(document.querySelector("#chart-bar"), optionsBar);
+    chartBar.render();
 
     return () => {
       chart.destroy();
-      // chartBar.destroy();
+      chartBar.destroy();
     };
-  }, [candleData]);
+  }, [ohlcv]);
 
   return (
     <div>
