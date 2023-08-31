@@ -36,10 +36,6 @@ const Home = () => {
         background: "#1E1E1E",
         foreColor: "#fff",
       },
-      title: {
-        text: "CandleStick Chart",
-        align: "left",
-      },
       xaxis: {
         type: "datetime",
       },

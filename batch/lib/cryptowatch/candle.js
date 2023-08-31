@@ -25,7 +25,7 @@ class Candle {
         },
       })
       .then((response) => {
-        const data = response.data.result[this.period].slice(0, this.dataLimit);
+        const data = response.data.result[this.period].slice(-this.dataLimit);
         const formattedData = data.map((d) => {
           return {
             time: d[0],

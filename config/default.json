@@ -1,6 +1,6 @@
 {
   "cryptowatch": {
-    "exchange": "binance-us",
+    "exchange": "bitflyer",
     "asset": "usd",
     "currency": ["btc"],
     "initialDataLimit": 365,
