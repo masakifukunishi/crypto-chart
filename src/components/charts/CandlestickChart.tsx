@@ -29,7 +29,7 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ data }) => {
         id: "candles",
         type: "candlestick",
         height: 320,
-        background: "#1E1E1E",
+        background: "#1a202c",
         foreColor: "#fff",
         toolbar: {
           show: false,
