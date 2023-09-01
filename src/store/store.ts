@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import chartReducer from "./slicers/chart";
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     chart: chartReducer,
   },
 });
 
-export default store;
+export type RootState = ReturnType<typeof store.getState>;

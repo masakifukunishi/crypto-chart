@@ -1,11 +1,13 @@
 import TabItem from "./TabItem";
+import { CHART_PRRIOD } from "../../../constants/chart";
+
 const Index = () => {
   return (
     <ul className="flex flex-wrap text-xs font-medium text-center border-b border-gray-700">
-      <TabItem isActive={true} ItemName="1 year" />
-      <TabItem isActive={false} ItemName="Year to Date" />
-      <TabItem isActive={false} ItemName="6 month" />
-      <TabItem isActive={false} ItemName="1 month" />
+      <TabItem item={CHART_PRRIOD.ONE_YEAR} />
+      <TabItem item={CHART_PRRIOD.YEAR_TO_DATE} />
+      <TabItem item={CHART_PRRIOD.SIX_MONTHS} />
+      <TabItem item={CHART_PRRIOD.ONE_MONTH} />
     </ul>
   );
 };

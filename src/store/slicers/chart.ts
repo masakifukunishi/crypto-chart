@@ -1,5 +1,6 @@
 // src/store/chartSlice.js
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 const initialState = {
   period: "1YEAR",
@@ -20,5 +21,8 @@ const chartSlice = createSlice({
 });
 
 export const { setChartPeriod, setCurrencyPair } = chartSlice.actions;
+
+export const selectChartPeriod = (state: RootState) => state.chart.period;
+export const selectCurrencyPair = (state: RootState) => state.chart.currencyPair;
 
 export default chartSlice.reducer;

@@ -1,17 +1,31 @@
+import { useSelector, useDispatch } from "react-redux";
+
+import { selectChartPeriod, setChartPeriod } from "../../../store/slicers/chart";
+
 interface TabItemProps {
-  isActive: boolean;
-  ItemName: string;
+  item: {
+    value: string;
+    displayName: string;
+  };
 }
 
-const TabItem: React.FC<TabItemProps> = ({ isActive, ItemName }) => {
+const TabItem: React.FC<TabItemProps> = ({ item }) => {
+  const chartPeriod = useSelector(selectChartPeriod);
+  const isActive = chartPeriod === item.value;
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(setChartPeriod(item.value));
+  };
+
   return (
     <li>
       {isActive ? (
-        <a className="inline-block p-3 text-yellow-400 bg-gray-800 rounded-t-lg">{ItemName}</a>
+        <span className="inline-block p-3 text-yellow-400 bg-gray-800 rounded-t-lg">{item.displayName}</span>
       ) : (
-        <a href="#" className="inline-block p-3 rounded-t-lg text-gray-200 hover:bg-gray-800 dark:hover:text-gray-100">
-          {ItemName}
-        </a>
+        <span onClick={handleClick} className="inline-block p-3 rounded-t-lg text-gray-200 hover:bg-gray-800 dark:hover:text-gray-100">
+          {item.displayName}
+        </span>
       )}
     </li>
   );
