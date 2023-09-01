@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import ohlcvApi from "../api/ohlcv";
+import Header from "../components/header/Index";
 import CandlestickChart from "../components/charts/CandlestickChart";
 import VolumeBarChart from "../components/charts/VolumeBarChart";
 
@@ -19,8 +20,8 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <div className="font-bold">Crypto chart</div>
+    <div className="bg-gray-900 text-yellow-400">
+      <Header />
       <CandlestickChart data={ohlcv.ohlc} />
       <VolumeBarChart data={ohlcv.volume} />
     </div>
