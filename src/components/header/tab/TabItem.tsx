@@ -21,9 +21,12 @@ const TabItem: React.FC<TabItemProps> = ({ item }) => {
   return (
     <li>
       {isActive ? (
-        <span className="inline-block p-3 text-yellow-400 bg-gray-800 rounded-t-lg">{item.displayName}</span>
+        <span className="inline-block p-3 text-yellow-400 bg-gray-800 rounded-t-lg cursor-pointer">{item.displayName}</span>
       ) : (
-        <span onClick={handleClick} className="inline-block p-3 rounded-t-lg text-gray-200 hover:bg-gray-800 dark:hover:text-gray-100">
+        <span
+          onClick={handleClick}
+          className="inline-block p-3 rounded-t-lg text-gray-200 hover:bg-gray-800 dark:hover:text-gray-100 cursor-pointer"
+        >
           {item.displayName}
         </span>
       )}
