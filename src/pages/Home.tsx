@@ -5,7 +5,7 @@ import Header from "../components/header/Index";
 import CandlestickChart from "../components/charts/CandlestickChart";
 import VolumeBarChart from "../components/charts/VolumeBarChart";
 
-const Home = () => {
+const Home: React.FC = () => {
   const [ohlcv, setOhlcv] = useState({ ohlc: [], volume: [] });
   useEffect(() => {
     const fetchOhlcvData = async () => {
@@ -20,7 +20,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-gray-900 text-yellow-400">
+    <div className="bg-gray-900 text-gray-50">
       <Header />
       <CandlestickChart data={ohlcv.ohlc} />
       <VolumeBarChart data={ohlcv.volume} />
