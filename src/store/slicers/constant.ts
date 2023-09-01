@@ -3,7 +3,28 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 const initialState = {
-  CHART_CONSTANT: {},
+  chartConstant: {
+    CHART_CONSTANT: {
+      CHART_PERIOD: {
+        ONE_YEAR: {
+          value: "",
+          displayName: "",
+        },
+        YEAR_TO_DATE: {
+          value: "",
+          displayName: "",
+        },
+        SIX_MONTHS: {
+          value: "",
+          displayName: "",
+        },
+        ONE_MONTH: {
+          value: "",
+          displayName: "",
+        },
+      },
+    },
+  },
 };
 
 const constantSlice = createSlice({
@@ -11,16 +32,16 @@ const constantSlice = createSlice({
   initialState,
   reducers: {
     setChartConstant: (state, action) => {
-      state.CHART_CONSTANT = action.payload;
+      state.chartConstant = action.payload;
     },
     initializeChartConstant: (state) => {
-      state.CHART_CONSTANT = {};
+      state.chartConstant = initialState.chartConstant;
     },
   },
 });
 
 export const { setChartConstant, initializeChartConstant } = constantSlice.actions;
 
-export const selectChartConstant = (state: RootState) => state.constant.CHART_CONSTANT;
+export const selectChartConstant = (state: RootState) => state.constant.chartConstant.CHART_CONSTANT;
 
 export default constantSlice.reducer;

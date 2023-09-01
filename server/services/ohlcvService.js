@@ -1,5 +1,5 @@
-// services/ohlcvService.js
 import Ohlcv from "../models/ohlcv.js";
+import { CHART_CONSTANT } from "../constants/chart.js";
 
 export default class OhlcvService {
   async getChartData(period) {
@@ -33,31 +33,42 @@ export default class OhlcvService {
   }
 
   calculateDateRange(period) {
-    let startDate, endDate;
+    const currentDate = new Date();
+    let startDate = null;
+    let endDate = null;
 
-    if (period === "1YEAR") {
-      const oneYearAgo = new Date();
-      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-      startDate = oneYearAgo.getTime();
-      endDate = new Date().getTime();
-    } else if (period === "YTD") {
-      const currentYear = new Date().getFullYear();
-      startDate = new Date(currentYear, 0, 1).getTime();
-      endDate = new Date().getTime();
-    } else if (period === "6MONTH") {
-      const sixMonthsAgo = new Date();
-      sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
-      startDate = sixMonthsAgo.getTime();
-      endDate = new Date().getTime();
-    } else if (period === "1MONTH") {
-      const oneMonthAgo = new Date();
-      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-      startDate = oneMonthAgo.getTime();
-      endDate = new Date().getTime();
-    } else {
-      startDate = null;
-      endDate = null;
+    switch (period) {
+      case CHART_CONSTANT.CHART_PERIOD.ONE_YEAR.value: {
+        const oneYearAgo = new Date(currentDate);
+        oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+        startDate = oneYearAgo.getTime();
+        endDate = currentDate.getTime();
+        break;
+      }
+      case CHART_CONSTANT.CHART_PERIOD.YEAR_TO_DATE.value: {
+        const currentYear = currentDate.getFullYear();
+        startDate = new Date(currentYear, 0, 1).getTime();
+        endDate = currentDate.getTime();
+        break;
+      }
+      case CHART_CONSTANT.CHART_PERIOD.SIX_MONTHS.value: {
+        const sixMonthsAgo = new Date(currentDate);
+        sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+        startDate = sixMonthsAgo.getTime();
+        endDate = currentDate.getTime();
+        break;
+      }
+      case CHART_CONSTANT.CHART_PERIOD.ONE_MONTH.value: {
+        const oneMonthAgo = new Date(currentDate);
+        oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+        startDate = oneMonthAgo.getTime();
+        endDate = currentDate.getTime();
+        break;
+      }
+      default:
+        throw new Error("Invalid period");
     }
+
     return { startDate, endDate };
   }
 }
