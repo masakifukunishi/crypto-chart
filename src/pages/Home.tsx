@@ -4,8 +4,8 @@ import Header from "../components/header/Index";
 import CandlestickChart from "../components/charts/CandlestickChart";
 import VolumeBarChart from "../components/charts/VolumeBarChart";
 import { selectChartPeriod, selectCurrencyPair } from "../store/slicers/chart";
-import useFetchOhlcvData from "../hook/useFetchOhlcvData";
-import useFetchConstants from "../hook/useFetchConstants";
+import useFetchOhlcvData from "../hooks/useFetchOhlcvData";
+import useFetchConstants from "../hooks/useFetchConstants";
 
 const Home: React.FC = () => {
   const chartPeriod = useSelector(selectChartPeriod);
