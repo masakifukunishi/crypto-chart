@@ -5,15 +5,15 @@ import Mongo from "../mongo.js";
 
 class Ohlcv {
   constructor(exchange, quoteAsset, baseAsset, dataLimit) {
-    const cryptoWatchConfig = config.get("cryptowatch");
-    this.period = cryptoWatchConfig.period.daily;
+    const cryptowatchConfig = config.get("cryptowatch");
+    this.period = cryptowatchConfig.period.daily;
     this.mongodb = new Mongo();
     this.exchange = exchange;
     this.quoteAsset = quoteAsset;
     this.baseAsset = baseAsset;
     this.pair = `${this.quoteAsset}${this.baseAsset}`;
     this.dataLimit = dataLimit;
-    this.url = `${cryptoWatchConfig.apiUrl}/markets/${this.exchange}/${this.pair}/ohlc`;
+    this.url = `${cryptowatchConfig.apiUrl}/markets/${this.exchange}/${this.pair}/ohlc`;
   }
 
   async get() {

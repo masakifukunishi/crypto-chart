@@ -4,13 +4,13 @@ import TabItem from "./TabItem";
 import { selectChartConstant } from "../../../store/slicers/constant";
 
 const Index = () => {
-  const chartPeriod = useSelector(selectChartConstant);
+  const chartConstant = useSelector(selectChartConstant);
   return (
     <ul className="flex flex-wrap text-xs font-medium text-center border-b border-gray-700">
-      <TabItem item={chartPeriod.CHART_PERIOD.ONE_YEAR} />
-      <TabItem item={chartPeriod.CHART_PERIOD.YEAR_TO_DATE} />
-      <TabItem item={chartPeriod.CHART_PERIOD.SIX_MONTHS} />
-      <TabItem item={chartPeriod.CHART_PERIOD.ONE_MONTH} />
+      <TabItem item={chartConstant.CHART_PERIOD.ONE_YEAR} />
+      <TabItem item={chartConstant.CHART_PERIOD.YEAR_TO_DATE} />
+      <TabItem item={chartConstant.CHART_PERIOD.SIX_MONTHS} />
+      <TabItem item={chartConstant.CHART_PERIOD.ONE_MONTH} />
     </ul>
   );
 };
