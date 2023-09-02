@@ -6,6 +6,7 @@ import VolumeBarChart from "../components/charts/VolumeBarChart";
 import { selectChartPeriod, selectCurrencyPair } from "../store/slicers/chart";
 import useFetchOhlcvData from "../hooks/useFetchOhlcvData";
 import useFetchConstants from "../hooks/useFetchConstants";
+import useFetchConfigs from "../hooks/useFetchConfigs";
 
 const Home: React.FC = () => {
   const chartPeriod = useSelector(selectChartPeriod);
@@ -13,6 +14,7 @@ const Home: React.FC = () => {
 
   const ohlcv = useFetchOhlcvData(chartPeriod, currencyPair);
   useFetchConstants("chart");
+  useFetchConfigs("cryptowatch");
 
   return (
     <div className="bg-gray-900 text-gray-50">

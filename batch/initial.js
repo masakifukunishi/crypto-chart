@@ -3,7 +3,7 @@ import config from "config";
 import Ohlcv from "./lib/cryptowatch/ohlcv.js";
 
 const cryptoWatchConfig = config.get("cryptowatch");
-const currencies = cryptoWatchConfig.quoteAssets;
+const quoteAssets = cryptoWatchConfig.quoteAssets;
 const baseAsset = cryptoWatchConfig.baseAsset;
 const exchange = cryptoWatchConfig.exchange;
 const initialDataLimit = cryptoWatchConfig.initialDataLimit;
