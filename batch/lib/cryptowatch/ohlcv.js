@@ -4,14 +4,14 @@ import config from "config";
 import Mongo from "../mongo.js";
 
 class Ohlcv {
-  constructor(exchange, currency, asset, dataLimit) {
+  constructor(exchange, quoteAsset, baseAsset, dataLimit) {
     const cryptoWatchConfig = config.get("cryptowatch");
     this.period = cryptoWatchConfig.period.daily;
     this.mongodb = new Mongo();
     this.exchange = exchange;
-    this.currency = currency;
-    this.asset = asset;
-    this.pair = `${this.currency}${this.asset}`;
+    this.quoteAsset = quoteAsset;
+    this.baseAsset = baseAsset;
+    this.pair = `${this.quoteAsset}${this.baseAsset}`;
     this.dataLimit = dataLimit;
     this.url = `${cryptoWatchConfig.apiUrl}/markets/${this.exchange}/${this.pair}/ohlc`;
   }
@@ -42,7 +42,7 @@ class Ohlcv {
       });
   }
   insert(data) {
-    this.mongodb.insertMany(`ohlcv_${this.currency}_${this.asset}`, data);
+    this.mongodb.insertMany(`ohlcv_${this.quoteAsset}_${this.baseAsset}`, data);
   }
 }
 
