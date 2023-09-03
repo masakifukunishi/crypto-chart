@@ -7,5 +7,10 @@
     "strict": true,
     "skipLibCheck": true,
     "moduleResolution": "node"
+  },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+    "transpileOnly": true
   }
 }

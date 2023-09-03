@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import OhlcvService from "../services/ohlcvService.js";
+import OhlcvService from "../services/ohlcvService";
 
 export async function getOhlcv(req: Request, res: Response) {
   const { period, currencyPair } = req.query;

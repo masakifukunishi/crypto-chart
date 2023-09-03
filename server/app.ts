@@ -1,7 +1,7 @@
 import path from "path";
 import express, { Express, Request, Response, NextFunction } from "express";
 import apiRoutes from "./api-routes/index";
-import "./helpers/db.js";
+import "./helpers/db";
 
 const app: Express = express();
 const port: number = Number(process.env.PORT) || 8080;

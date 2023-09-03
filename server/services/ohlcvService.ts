@@ -1,7 +1,7 @@
 import config from "config";
 
-import Ohlcv from "../models/ohlcv.js";
-import { CHART_CONSTANT } from "../constants/chart.js";
+import Ohlcv from "../models/ohlcv";
+import { CHART_CONSTANT } from "../constants/chart";
 
 export default class OhlcvService {
   private period: string;
