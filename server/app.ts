@@ -12,17 +12,17 @@ app.use(express.json());
 
 app.use("/api", apiRoutes);
 
-app.get("*", (req: Request, res: Response) => {
+app.get("*", (res: Response) => {
   const pathIndex: string = path.resolve("dist", "index.html");
   res.sendFile(pathIndex);
 });
 
-app.use(function (req: Request, res: Response) {
+app.use(function (res: Response) {
   res.status(404).send("Page Not Found");
 });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use(function (err: Error, req: Request, res: Response, next: NextFunction) {
-  console.error(err.stack);
   res.status(500).json({ msg: "Internal Server Error" });
 });
 

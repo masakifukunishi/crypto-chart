@@ -1,6 +1,6 @@
 import { CHART_CONSTANT } from "../constants/chart";
-import { Request, Response } from "express";
+import { Response } from "express";
 
-export async function getChartConstants(req: Request, res: Response) {
+export async function getChartConstants(res: Response) {
   res.json(CHART_CONSTANT);
 }
