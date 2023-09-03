@@ -7,9 +7,5 @@
     "strict": true,
     "skipLibCheck": true,
     "moduleResolution": "node"
-  },
-  "ts-node": {
-    "esm": true
-  },
-  "files": ["./app.ts"]
+  }
 }
