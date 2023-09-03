@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 const initialState = {
-  period: "1YEAR",
-  currencyPair: "btc_usd",
+  period: "",
+  currencyPair: "",
 };
 
 const chartSlice = createSlice({

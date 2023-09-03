@@ -3,8 +3,8 @@ export async function getOhlcv(req, res) {
   const { period, currencyPair } = req.query;
 
   try {
-    const ohlcvServiceInstance = new OhlcvService(currencyPair);
-    const formattedChartData = await ohlcvServiceInstance.getChartData(period);
+    const ohlcvServiceInstance = new OhlcvService(period, currencyPair);
+    const formattedChartData = await ohlcvServiceInstance.getChartData();
     res.json(formattedChartData);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });

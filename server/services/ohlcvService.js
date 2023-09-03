@@ -1,14 +1,23 @@
+import config from "config";
+
 import Ohlcv from "../models/ohlcv.js";
 import { CHART_CONSTANT } from "../constants/chart.js";
 
 export default class OhlcvService {
-  constructor(currencyPair) {
-    this.currencyPair = currencyPair;
+  constructor(period, currencyPair) {
+    this.period = period || CHART_CONSTANT.CHART_PERIOD.ONE_YEAR.value;
+    this.currencyPair = currencyPair || this.getDefaultCurrencyPair();
   }
-  async getChartData(period) {
+
+  getDefaultCurrencyPair() {
+    const cryptowatchConfig = config.get("cryptowatch");
+    return `${cryptowatchConfig.quoteAssets[0]}_${cryptowatchConfig.baseAsset}`;
+  }
+
+  async getChartData() {
     const collectionName = this.generateCollectionName();
     const OhlcvModel = Ohlcv(collectionName);
-    const { startDate, endDate } = this.calculateDateRange(period);
+    const { startDate, endDate } = this.calculateDateRange();
 
     const ohlcvRecords = await OhlcvModel.find({
       time: { $gte: startDate / 1000, $lte: endDate / 1000 },
@@ -39,12 +48,12 @@ export default class OhlcvService {
     return `ohlcv_${this.currencyPair}`;
   }
 
-  calculateDateRange(period) {
+  calculateDateRange() {
     const currentDate = new Date();
     let startDate = null;
     let endDate = null;
 
-    switch (period) {
+    switch (this.period) {
       case CHART_CONSTANT.CHART_PERIOD.ONE_YEAR.value: {
         const oneYearAgo = new Date(currentDate);
         oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
