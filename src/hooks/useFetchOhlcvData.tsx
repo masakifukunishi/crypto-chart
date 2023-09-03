@@ -6,22 +6,22 @@ interface OhlcvData {
   volume: any[];
 }
 
-const useFrtchOhlcvData = (chartPeriod: string, currencyPair: string): OhlcvData => {
+const useFetchOhlcvData = (period: string, currencyPair: string): OhlcvData => {
   const [ohlcv, setOhlcv] = useState({ ohlc: [], volume: [] });
 
   useEffect(() => {
     const fetchOhlcvData = async () => {
       try {
-        const _ohlcv = await ohlcvApi.get(chartPeriod);
+        const _ohlcv = await ohlcvApi.get(period, currencyPair);
         setOhlcv(_ohlcv);
       } catch (error) {
         console.error("Error fetching ohlcv data:", error);
       }
     };
     fetchOhlcvData();
-  }, [chartPeriod, currencyPair]);
+  }, [period, currencyPair]);
 
   return ohlcv;
 };
 
-export default useFrtchOhlcvData;
+export default useFetchOhlcvData;

@@ -2,8 +2,11 @@ import Ohlcv from "../models/ohlcv.js";
 import { CHART_CONSTANT } from "../constants/chart.js";
 
 export default class OhlcvService {
+  constructor(currencyPair) {
+    this.currencyPair = currencyPair;
+  }
   async getChartData(period) {
-    const collectionName = "ohlcv_btc_usd";
+    const collectionName = this.generateCollectionName();
     const OhlcvModel = Ohlcv(collectionName);
     const { startDate, endDate } = this.calculateDateRange(period);
 
@@ -30,6 +33,10 @@ export default class OhlcvService {
     };
 
     return formattedChartData;
+  }
+
+  generateCollectionName() {
+    return `ohlcv_${this.currencyPair}`;
   }
 
   calculateDateRange(period) {

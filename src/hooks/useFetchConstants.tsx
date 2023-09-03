@@ -10,7 +10,7 @@ const useConstants = (constantType: string): void => {
     const fetchConstants = async () => {
       try {
         if (constantType === "chart") {
-          const _chartConstants = await constantsApi.geChart();
+          const _chartConstants = await constantsApi.getChart();
           dispatch(setChartConstant(_chartConstants));
         }
       } catch (error) {

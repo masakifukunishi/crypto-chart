@@ -2,8 +2,8 @@
   "cryptowatch": {
     "apiUrl": "https://api.cryptowat.ch",
     "exchange": "bitflyer",
-    "asset": "usd",
-    "currency": ["btc"],
+    "baseAsset": "usd",
+    "quoteAssets": ["btc", "eth"],
     "initialDataLimit": 365,
     "period": {
       "daily": 86400

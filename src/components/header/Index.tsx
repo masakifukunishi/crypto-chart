@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import Tab from "./tab/Index";
+import SelectCurrency from "./select-currency/Index";
 const Header: React.FC = () => {
   return (
     <header className="py-1">
@@ -8,6 +9,7 @@ const Header: React.FC = () => {
         <Link to="/">Crypto chart</Link>
       </h1>
       <Tab />
+      <SelectCurrency />
     </header>
   );
 };

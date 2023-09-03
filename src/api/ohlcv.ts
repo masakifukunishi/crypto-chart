@@ -7,10 +7,11 @@ setupAxiosInterceptors();
 const ENDPOINT_URL = "/api/ohlcv";
 
 const ohlcvApi = {
-  async get(chartPeriod: string) {
+  async get(period: string, currencyPair: string) {
     const result = await axios.get(ENDPOINT_URL, {
       params: {
-        chartPeriod: chartPeriod,
+        period: period,
+        currencyPair: currencyPair,
       },
     });
     return result.data;
