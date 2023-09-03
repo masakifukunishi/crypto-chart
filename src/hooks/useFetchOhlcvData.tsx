@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import ohlcvApi from "../api/ohlcv";
 
 interface OhlcvData {
-  ohlc: any[];
-  volume: any[];
+  ohlc: { x: number; y: number[] }[];
+  volume: { x: number; y: number }[];
 }
 
 const useFetchOhlcvData = (period: string, currencyPair: string): OhlcvData => {
