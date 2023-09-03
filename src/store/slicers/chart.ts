@@ -4,7 +4,7 @@ import { RootState } from "../store";
 
 const initialState = {
   period: "1YEAR",
-  currencyPair: "BTC-USD",
+  currencyPair: "btc_usd",
 };
 
 const chartSlice = createSlice({

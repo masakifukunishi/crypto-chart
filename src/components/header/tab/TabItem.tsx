@@ -10,8 +10,8 @@ interface TabItemProps {
 }
 
 const TabItem: React.FC<TabItemProps> = ({ item }) => {
-  const chartPeriod = useSelector(selectChartPeriod);
-  const isActive = chartPeriod === item.value;
+  const period = useSelector(selectChartPeriod);
+  const isActive = period === item.value;
   const dispatch = useDispatch();
 
   const handleClick = () => {

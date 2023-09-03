@@ -9,10 +9,10 @@ import useFetchConstants from "../hooks/useFetchConstants";
 import useFetchConfigs from "../hooks/useFetchConfigs";
 
 const Home: React.FC = () => {
-  const chartPeriod = useSelector(selectChartPeriod);
+  const period = useSelector(selectChartPeriod);
   const currencyPair = useSelector(selectCurrencyPair);
 
-  const ohlcv = useFetchOhlcvData(chartPeriod, currencyPair);
+  const ohlcv = useFetchOhlcvData(period, currencyPair);
   useFetchConstants("chart");
   useFetchConfigs("cryptowatch");
 
