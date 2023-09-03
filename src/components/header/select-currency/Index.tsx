@@ -10,10 +10,10 @@ interface CurrencyPair {
 
 const Index = () => {
   const cryptowatchConfig = useSelector(selecCryptowatchConfig);
-  const baseAsset = cryptowatchConfig.baseAsset.toUpperCase();
+  const baseAsset = cryptowatchConfig.baseAsset;
   const quoteAssets = cryptowatchConfig.quoteAssets;
   const currencyOptions = quoteAssets.map((quoteAsset: string) => ({
-    displayName: `${quoteAsset.toUpperCase()} / ${baseAsset}`,
+    displayName: `${quoteAsset.toUpperCase()} / ${baseAsset.toUpperCase()}`,
     value: `${quoteAsset}_${baseAsset}`,
   }));
 
