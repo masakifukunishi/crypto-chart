@@ -1,6 +1,6 @@
 import express from "express";
-import { requestErrorHandler } from "../helpers/helper.js";
-import { getChartConstants } from "../controllers/constantsController.js";
+import { requestErrorHandler } from "../helpers/helper";
+import { getChartConstants } from "../controllers/constantsController";
 
 const router = express.Router();
 

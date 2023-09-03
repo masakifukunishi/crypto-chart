@@ -1,7 +1,7 @@
 import express from "express";
-import ohlcvRoutes from "./ohlcv.js";
-import constantsRoutes from "./constants.js";
-import configsRouters from "./configs.js";
+import ohlcvRoutes from "./ohlcv";
+import constantsRoutes from "./constants";
+import configsRouters from "./configs";
 
 const router = express.Router();
 
