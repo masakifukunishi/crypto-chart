@@ -2,7 +2,10 @@ import { useEffect, useRef } from "react";
 import ApexCharts from "apexcharts";
 
 interface CandlestickChartProps {
-  data: any;
+  data: {
+    x: number;
+    y: number[];
+  }[];
 }
 
 const CandlestickChart: React.FC<CandlestickChartProps> = ({ data }) => {

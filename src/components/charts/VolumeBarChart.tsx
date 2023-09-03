@@ -2,7 +2,10 @@ import { useEffect, useRef } from "react";
 import ApexCharts from "apexcharts";
 
 interface VolumeBarChartProps {
-  data: any;
+  data: {
+    x: number;
+    y: number;
+  }[];
 }
 const VolumeBarChart: React.FC<VolumeBarChartProps> = ({ data }) => {
   const chartRef = useRef(null);
