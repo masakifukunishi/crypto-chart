@@ -1,19 +1,29 @@
 import axios from "axios";
 import config from "config";
 
-import Mongo from "../mongo.js";
+import "../../../helpers/db.js";
+import Ohlcv from "../../../models/ohlcv.js";
 
-class Ohlcv {
-  constructor(exchange, quoteAsset, baseAsset, dataLimit) {
-    const cryptowatchConfig = config.get("cryptowatch");
+class CryptowatchOhlcv {
+  private period: string;
+  private exchange: string;
+  private quoteAsset: string;
+  private baseAsset: string;
+  private pair: string;
+  private dataLimit: number;
+  private url: string;
+  private ohlcvModel: any;
+
+  constructor(exchange: string, quoteAsset: string, baseAsset: string, dataLimit: number) {
+    const cryptowatchConfig: any = config.get("cryptowatch");
     this.period = cryptowatchConfig.period.daily;
-    this.mongodb = new Mongo();
     this.exchange = exchange;
     this.quoteAsset = quoteAsset;
     this.baseAsset = baseAsset;
     this.pair = `${this.quoteAsset}${this.baseAsset}`;
     this.dataLimit = dataLimit;
     this.url = `${cryptowatchConfig.apiUrl}/markets/${this.exchange}/${this.pair}/ohlc`;
+    this.ohlcvModel = Ohlcv(`ohlcv_${this.quoteAsset}_${this.baseAsset}`);
   }
 
   async get() {
@@ -25,7 +35,7 @@ class Ohlcv {
       })
       .then((response) => {
         const data = response.data.result[this.period].slice(-this.dataLimit);
-        const formattedData = data.map((d) => {
+        const formattedData = data.map((d: any) => {
           return {
             time: d[0],
             open: d[1],
@@ -41,9 +51,13 @@ class Ohlcv {
         console.log(error);
       });
   }
-  insert(data) {
-    this.mongodb.insertMany(`ohlcv_${this.quoteAsset}_${this.baseAsset}`, data);
+  async insert(data: any) {
+    try {
+      await this.ohlcvModel.insertMany(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 
-export default Ohlcv;
+export default CryptowatchOhlcv;
