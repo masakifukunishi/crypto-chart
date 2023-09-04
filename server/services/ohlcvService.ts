@@ -1,5 +1,6 @@
 import config from "config";
 
+import { CryptowatchConfig } from "../../config/config.js";
 import Ohlcv from "../models/ohlcv.js";
 import { CHART_CONSTANT } from "../constants/chart.js";
 
@@ -13,7 +14,7 @@ export default class OhlcvService {
   }
 
   getDefaultCurrencyPair() {
-    const cryptowatchConfig: any = config.get("cryptowatch");
+    const cryptowatchConfig: CryptowatchConfig = config.get("cryptowatch");
     return `${cryptowatchConfig.quoteAssets[0]}_${cryptowatchConfig.baseAsset}`;
   }
 
@@ -53,8 +54,8 @@ export default class OhlcvService {
 
   calculateDateRange() {
     const currentDate = new Date();
-    let startDate = null;
-    let endDate = null;
+    let startDate = 0;
+    let endDate = 0;
 
     switch (this.period) {
       case CHART_CONSTANT.CHART_PERIOD.ONE_YEAR.value: {
