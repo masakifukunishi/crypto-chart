@@ -1,9 +1,10 @@
 import express from "express";
+
 import { requestErrorHandler } from "../helpers/helper.js";
-import { getOhlcv } from "../controllers/ohlcvController.js";
+import { getChartConstants } from "../controllers/constantsController.js";
 
 const router = express.Router();
 
-router.get("/", requestErrorHandler(getOhlcv));
+router.get("/chart", requestErrorHandler(getChartConstants));
 
 export default router;

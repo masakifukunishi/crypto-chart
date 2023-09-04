@@ -27,5 +27,5 @@ const OhlcvSchema = new Schema({
   },
 });
 
-const Ohlcv = (collectionName) => model("Ohlcv", OhlcvSchema, collectionName);
+const Ohlcv = (collectionName: string) => model("Ohlcv", OhlcvSchema, collectionName);
 export default Ohlcv;

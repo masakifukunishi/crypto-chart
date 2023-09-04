@@ -1,7 +1,10 @@
-import mongoose from "mongoose";
+import mongoose, { ConnectOptions } from "mongoose";
 import env from "dotenv";
+
 env.config();
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+const mongodbUri = process.env.MONGODB_URI as string;
+mongoose.connect(mongodbUri, { useNewUrlParser: true, useUnifiedTopology: true } as ConnectOptions);
 
 const db = mongoose.connection;
 

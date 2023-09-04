@@ -21,7 +21,7 @@ const useConfigs = (configType: string): void => {
     return () => {
       dispatch(initializeCryptowatchConfig());
     };
-  }, [dispatch]);
+  }, [dispatch, configType]);
 
   return;
 };

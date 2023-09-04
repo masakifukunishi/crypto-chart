@@ -1,9 +1,10 @@
 import express from "express";
+
 import { requestErrorHandler } from "../helpers/helper.js";
-import { getChartConstants } from "../controllers/constantsController.js";
+import { getCryptowatchConfigs } from "../controllers/configsController.js";
 
 const router = express.Router();
 
-router.get("/chart", requestErrorHandler(getChartConstants));
+router.get("/cryptowatch", requestErrorHandler(getCryptowatchConfigs));
 
 export default router;

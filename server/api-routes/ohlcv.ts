@@ -1,9 +1,10 @@
 import express from "express";
+
 import { requestErrorHandler } from "../helpers/helper.js";
-import { getCryptowatchConfigs } from "../controllers/configsController.js";
+import { getOhlcv } from "../controllers/ohlcvController.js";
 
 const router = express.Router();
 
-router.get("/cryptowatch", requestErrorHandler(getCryptowatchConfigs));
+router.get("/", requestErrorHandler(getOhlcv));
 
 export default router;

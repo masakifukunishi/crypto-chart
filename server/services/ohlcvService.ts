@@ -4,13 +4,16 @@ import Ohlcv from "../models/ohlcv.js";
 import { CHART_CONSTANT } from "../constants/chart.js";
 
 export default class OhlcvService {
-  constructor(period, currencyPair) {
+  private period: string;
+  private currencyPair: string;
+
+  constructor(period: string, currencyPair: string) {
     this.period = period || CHART_CONSTANT.CHART_PERIOD.ONE_YEAR.value;
     this.currencyPair = currencyPair || this.getDefaultCurrencyPair();
   }
 
   getDefaultCurrencyPair() {
-    const cryptowatchConfig = config.get("cryptowatch");
+    const cryptowatchConfig: any = config.get("cryptowatch");
     return `${cryptowatchConfig.quoteAssets[0]}_${cryptowatchConfig.baseAsset}`;
   }
 

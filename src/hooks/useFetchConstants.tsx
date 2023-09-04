@@ -21,7 +21,7 @@ const useConstants = (constantType: string): void => {
     return () => {
       dispatch(initializeChartConstant());
     };
-  }, [dispatch]);
+  }, [dispatch, constantType]);
 
   return;
 };

@@ -1,9 +1,12 @@
+import { Request, Response } from "express";
+
 import OhlcvService from "../services/ohlcvService.js";
-export async function getOhlcv(req, res) {
+
+export async function getOhlcv(req: Request, res: Response) {
   const { period, currencyPair } = req.query;
 
   try {
-    const ohlcvServiceInstance = new OhlcvService(period, currencyPair);
+    const ohlcvServiceInstance = new OhlcvService(period as string, currencyPair as string);
     const formattedChartData = await ohlcvServiceInstance.getChartData();
     res.json(formattedChartData);
   } catch (error) {
