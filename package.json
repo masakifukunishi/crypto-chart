@@ -19,6 +19,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@types/config": "^3.3.0",
+    "@types/node-cron": "^3.0.8",
     "apexcharts": "^3.42.0",
     "axios": "^1.5.0",
     "config": "^3.3.9",
