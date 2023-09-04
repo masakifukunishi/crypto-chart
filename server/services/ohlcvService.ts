@@ -53,8 +53,8 @@ export default class OhlcvService {
 
   calculateDateRange() {
     const currentDate = new Date();
-    let startDate = null;
-    let endDate = null;
+    let startDate = 0;
+    let endDate = 0;
 
     switch (this.period) {
       case CHART_CONSTANT.CHART_PERIOD.ONE_YEAR.value: {

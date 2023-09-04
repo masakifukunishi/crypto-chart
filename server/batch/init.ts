@@ -8,7 +8,7 @@ const baseAsset = cryptowatchConfig.baseAsset;
 const exchange = cryptowatchConfig.exchange;
 const initialDataLimit = cryptowatchConfig.initialDataLimit;
 
-quoteAssets.map(async (quoteAsset: any) => {
+quoteAssets.map(async (quoteAsset: string) => {
   const ohlcv = new CryptowatchOhlcv(exchange, quoteAsset, baseAsset, initialDataLimit);
   const data = await ohlcv.get();
   ohlcv.insert(data);
