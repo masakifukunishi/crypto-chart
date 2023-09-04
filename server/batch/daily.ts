@@ -20,6 +20,6 @@ async function processData() {
   );
 }
 
-cron.schedule("* * * * *", () => {
+cron.schedule("0 0 * * *", () => {
   processData;
 });
