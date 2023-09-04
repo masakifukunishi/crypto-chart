@@ -4,10 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently 'vite' 'nodemon --esm server/app.ts'",
-    "build": "tsc && vite build",
+    "start": "npm run build && npm run server",
+    "build": "npm-run-all build-client build-server",
+    "build-client": "tsc && vite build",
+    "build-server": "tsc -p tsconfig.server.json",
+    "serve": "node server/dist/app.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev": "npm-run-all --parallel dev-server dev-client",
+    "dev-client": "vite",
+    "dev-server": "nodemon --esm server/app.ts"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
