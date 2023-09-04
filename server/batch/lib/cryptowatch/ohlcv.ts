@@ -53,8 +53,6 @@ class CryptowatchOhlcv {
   }
   async insert(data: any) {
     try {
-      console.log("inseeeeeeeert");
-      console.log(data);
       await this.ohlcvModel.insertMany(data);
     } catch (error) {
       console.log(error);
