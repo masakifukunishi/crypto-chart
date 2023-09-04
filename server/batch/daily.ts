@@ -7,10 +7,10 @@ const cryptowatchConfig: CryptowatchConfig = config.get("cryptowatch");
 const quoteAssets = cryptowatchConfig.quoteAssets;
 const baseAsset = cryptowatchConfig.baseAsset;
 const exchange = cryptowatchConfig.exchange;
-const dailyDataNum = cryptowatchConfig.dailyDataNum;
+const initDataNum = cryptowatchConfig.initDataNum;
 
 quoteAssets.map(async (quoteAsset: string) => {
-  const ohlcv = new CryptowatchOhlcv(exchange, quoteAsset, baseAsset, dailyDataNum);
+  const ohlcv = new CryptowatchOhlcv(exchange, quoteAsset, baseAsset, initDataNum);
   const data = await ohlcv.get();
   ohlcv.insert(data);
 });

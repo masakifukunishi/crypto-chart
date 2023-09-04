@@ -4,7 +4,8 @@
     "exchange": "bitflyer",
     "baseAsset": "usd",
     "quoteAssets": ["btc", "eth"],
-    "initialDataLimit": 365,
+    "initDataNum": 365,
+    "dailyDataNum": 1,
     "period": {
       "daily": 86400
     }

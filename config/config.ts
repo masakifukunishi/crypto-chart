@@ -3,7 +3,8 @@ export interface CryptowatchConfig {
   exchange: string;
   baseAsset: string;
   quoteAssets: string[];
-  initialDataLimit: number;
+  initDataNum: number;
+  dailyDataNum: number;
   period: {
     daily: number;
   };
