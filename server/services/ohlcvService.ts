@@ -1,5 +1,6 @@
 import config from "config";
 
+import { CryptowatchConfig } from "../../config/config.js";
 import Ohlcv from "../models/ohlcv.js";
 import { CHART_CONSTANT } from "../constants/chart.js";
 
@@ -13,7 +14,7 @@ export default class OhlcvService {
   }
 
   getDefaultCurrencyPair() {
-    const cryptowatchConfig: any = config.get("cryptowatch");
+    const cryptowatchConfig: CryptowatchConfig = config.get("cryptowatch");
     return `${cryptowatchConfig.quoteAssets[0]}_${cryptowatchConfig.baseAsset}`;
   }
 
