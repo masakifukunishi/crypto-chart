@@ -1,6 +1,7 @@
 import express from "express";
-import { requestErrorHandler } from "../helpers/helper";
-import { getCryptowatchConfigs } from "../controllers/configsController";
+
+import { requestErrorHandler } from "../helpers/helper.js";
+import { getCryptowatchConfigs } from "../controllers/configsController.js";
 
 const router = express.Router();
 

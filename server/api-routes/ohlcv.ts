@@ -1,6 +1,7 @@
 import express from "express";
-import { requestErrorHandler } from "../helpers/helper";
-import { getOhlcv } from "../controllers/ohlcvController";
+
+import { requestErrorHandler } from "../helpers/helper.js";
+import { getOhlcv } from "../controllers/ohlcvController.js";
 
 const router = express.Router();
 
