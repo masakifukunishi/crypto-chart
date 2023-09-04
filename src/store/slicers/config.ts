@@ -8,7 +8,8 @@ const initialState = {
     exchange: "",
     baseAsset: "",
     quoteAssets: [],
-    initialDataLimit: 0,
+    initDataNum: 0,
+    dailyDataNum: 0,
     period: {
       daily: 0,
     },
