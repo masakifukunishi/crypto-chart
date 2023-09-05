@@ -2,11 +2,12 @@ import axios from "axios";
 import config from "config";
 import { Model } from "mongoose";
 
-import { CryptowatchConfig } from "../../../../config/config.js";
+import { CryptowatchConfig } from "../../../types/config.js";
 import "../../../helpers/db.js";
 import Ohlcv, { OhlcvDocument } from "../../../models/ohlcv.js";
 
 class CryptowatchOhlcv {
+  private cryptowatchConfig: CryptowatchConfig;
   private period: number;
   private exchange: string;
   private quoteAsset: string;
@@ -17,15 +18,14 @@ class CryptowatchOhlcv {
   private ohlcvModel: Model<OhlcvDocument>;
 
   constructor(exchange: string, quoteAsset: string, baseAsset: string, dataLimit: number) {
-    const cryptowatchConfig: CryptowatchConfig = config.get("cryptowatch");
-
-    this.period = cryptowatchConfig.period.daily;
+    this.cryptowatchConfig = config.get("cryptowatch");
+    this.period = this.cryptowatchConfig.period.daily;
     this.exchange = exchange;
     this.quoteAsset = quoteAsset;
     this.baseAsset = baseAsset;
     this.pair = `${this.quoteAsset}${this.baseAsset}`;
     this.dataLimit = dataLimit;
-    this.url = `${cryptowatchConfig.apiUrl}/markets/${this.exchange}/${this.pair}/ohlc`;
+    this.url = `${this.cryptowatchConfig.apiUrl}/markets/${this.exchange}/${this.pair}/ohlc`;
     this.ohlcvModel = Ohlcv(`ohlcv_${this.quoteAsset}_${this.baseAsset}`);
   }
 
