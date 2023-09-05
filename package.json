@@ -8,13 +8,16 @@
     "build": "npm-run-all build-client build-server",
     "build-client": "tsc && vite build",
     "build-server": "tsc -p tsconfig.server.json",
+    "batch-init": "node server/dist/batch/init.js",
+    "batch-daily": "node server/dist/batch/daily.js",
     "serve": "node server/dist/app.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "dev": "npm-run-all --parallel dev-server dev-client",
     "dev-client": "vite",
     "dev-server": "nodemon --esm server/app.ts",
-    "dev-batch-init": "npx ts-node --esm server/batch/init.ts"
+    "dev-batch-init": "npx ts-node --esm server/batch/init.ts",
+    "dev-batch-daily": "npx ts-node --esm server/batch/daily.ts"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
