@@ -1,6 +1,6 @@
 import config from "config";
 
-import { CryptowatchConfig } from "../../config/config.js";
+import { CryptowatchConfig } from "../types/config.js";
 import CryptowatchOhlcv from "./lib/cryptowatch/ohlcv.js";
 
 async function processData() {

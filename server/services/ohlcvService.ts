@@ -1,21 +1,22 @@
 import config from "config";
 
-import { CryptowatchConfig } from "../../config/config.js";
+import { CryptowatchConfig } from "../types/config.js";
 import Ohlcv from "../models/ohlcv.js";
 import { CHART_CONSTANT } from "../constants/chart.js";
 
 export default class OhlcvService {
   private period: string;
   private currencyPair: string;
+  private cryptowatchConfig: CryptowatchConfig;
 
   constructor(period: string, currencyPair: string) {
     this.period = period || CHART_CONSTANT.CHART_PERIOD.ONE_YEAR.value;
     this.currencyPair = currencyPair || this.getDefaultCurrencyPair();
+    this.cryptowatchConfig = config.get("cryptowatch");
   }
 
   getDefaultCurrencyPair() {
-    const cryptowatchConfig: CryptowatchConfig = config.get("cryptowatch");
-    return `${cryptowatchConfig.quoteAssets[0]}_${cryptowatchConfig.baseAsset}`;
+    return `${this.cryptowatchConfig.quoteAssets[0]}_${this.cryptowatchConfig.baseAsset}`;
   }
 
   async getChartData() {
