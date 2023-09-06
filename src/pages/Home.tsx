@@ -19,7 +19,7 @@ const Home: React.FC = () => {
   useFetchConfigs("cryptowatch");
 
   return (
-    <div className="bg-gray-900 text-gray-50">
+    <div className="bg-gray-900 text-gray-50 min-h-screen">
       <Header />
       <Tab />
       <SelectCurrency />
