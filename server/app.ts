@@ -16,13 +16,9 @@ app.use(express.json());
 
 app.use("/api", apiRoutes);
 
-app.get("*", (res: Response) => {
+app.get("*", (_req: Request, res: Response) => {
   const pathIndex: string = path.resolve("dist", "index.html");
-  res.sendFile(pathIndex);
-});
-
-app.use(function (res: Response) {
-  res.status(404).send("Page Not Found");
+  res.status(404).sendFile(pathIndex);
 });
 
 // This function is marked as having an unused 'err' parameter, but it's necessary
