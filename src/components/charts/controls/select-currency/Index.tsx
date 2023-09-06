@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import { selecCryptowatchConfig } from "../../../store/slicers/config";
-import { setCurrencyPair } from "../../../store/slicers/chart";
+import { selecCryptowatchConfig } from "../../../../store/slicers/config";
+import { setCurrencyPair } from "../../../../store/slicers/chart";
 
 interface CurrencyPair {
   displayName: string;

@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 
 import TabItem from "./TabItem";
-import { selectChartConstant } from "../../../store/slicers/constant";
-import { selectChartPeriod, setChartPeriod } from "../../../store/slicers/chart";
+import { selectChartConstant } from "../../../../store/slicers/constant";
+import { selectChartPeriod, setChartPeriod } from "../../../../store/slicers/chart";
 
 const Index = () => {
   const chartConstant = useSelector(selectChartConstant);

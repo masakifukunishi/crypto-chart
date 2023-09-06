@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 
 import Header from "../components/header/Index";
+import Tab from "../components/charts/controls/tab/Index";
+import SelectCurrency from "../components/charts/controls/select-currency/Index";
 import CandlestickChart from "../components/charts/CandlestickChart";
 import VolumeBarChart from "../components/charts/VolumeBarChart";
 import { selectChartPeriod, selectCurrencyPair } from "../store/slicers/chart";
@@ -19,6 +21,8 @@ const Home: React.FC = () => {
   return (
     <div className="bg-gray-900 text-gray-50">
       <Header />
+      <Tab />
+      <SelectCurrency />
       <CandlestickChart data={ohlcv.ohlc} />
       <VolumeBarChart data={ohlcv.volume} />
     </div>
