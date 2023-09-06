@@ -39,7 +39,7 @@ class CryptowatchOhlcv {
         const data = response.data.result[this.period].slice(-this.dataLimit);
         const formattedData = data.map((d: number[]) => {
           return {
-            time: d[0],
+            closeTime: d[0],
             open: d[1],
             high: d[2],
             low: d[3],

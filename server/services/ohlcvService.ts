@@ -25,18 +25,18 @@ export default class OhlcvService {
     const { startDate, endDate } = this.calculateDateRange();
 
     const ohlcvRecords = await OhlcvModel.find({
-      time: { $gte: startDate / 1000, $lte: endDate / 1000 },
+      closeTime: { $gte: startDate / 1000, $lte: endDate / 1000 },
     });
     const formattedOhlc = ohlcvRecords.map((record) => {
       return {
-        x: record.time * 1000,
+        x: record.closeTime * 1000,
         y: [record.open, record.high, record.low, record.close],
       };
     });
 
     const formattedVolume = ohlcvRecords.map((record) => {
       return {
-        x: record.time * 1000,
+        x: record.closeTime * 1000,
         y: record.volume,
       };
     });

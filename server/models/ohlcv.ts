@@ -1,7 +1,7 @@
 import { Schema, model, Document } from "mongoose";
 
 export interface OhlcvDocument extends Document {
-  time: number;
+  closeTime: number;
   open: number;
   high: number;
   low: number;
@@ -10,7 +10,7 @@ export interface OhlcvDocument extends Document {
 }
 
 const OhlcvSchema = new Schema<OhlcvDocument>({
-  time: {
+  closeTime: {
     type: Number,
     required: true,
   },
