@@ -19,10 +19,11 @@ const Home: React.FC = () => {
   useFetchConfigs("cryptowatch");
 
   return (
-    <div className="bg-gray-900 text-gray-50 min-h-screen">
+    <div className="bg-gray-900 text-gray-50 min-h-screen p-1">
       <Header />
-      <Tab />
       <SelectCurrency />
+      <Tab />
+
       {/* This color and font designation is for tooltips */}
       <div className="text-gray-900 text-xs">
         <CandlestickChart data={ohlcv.ohlc} />
