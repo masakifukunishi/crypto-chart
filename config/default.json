@@ -1,7 +1,7 @@
 {
   "cryptowatch": {
     "apiUrl": "https://api.cryptowat.ch",
-    "exchange": "bitflyer",
+    "exchange": "bitfinex",
     "baseAsset": "usd",
     "quoteAssets": ["btc", "eth"],
     "initDataNum": 365,
