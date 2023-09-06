@@ -20,7 +20,7 @@ const VolumeBarChart: React.FC<VolumeBarChartProps> = ({ data }) => {
       chart: {
         height: 140,
         type: "bar",
-        background: "#1a202c",
+        // background: "#1a202c",
         foreColor: "#fff",
         toolbar: {
           show: false,

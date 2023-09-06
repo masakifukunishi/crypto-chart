@@ -23,8 +23,11 @@ const Home: React.FC = () => {
       <Header />
       <Tab />
       <SelectCurrency />
-      <CandlestickChart data={ohlcv.ohlc} />
-      <VolumeBarChart data={ohlcv.volume} />
+      {/* This color and font designation is for tooltips */}
+      <div className="text-gray-900 text-xs">
+        <CandlestickChart data={ohlcv.ohlc} />
+        <VolumeBarChart data={ohlcv.volume} />
+      </div>
     </div>
   );
 };
