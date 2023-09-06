@@ -3,7 +3,6 @@ import config from "config";
 import { Model } from "mongoose";
 
 import { CryptowatchConfig } from "../../../types/config.js";
-import "../../../helpers/db.js";
 import Ohlcv, { OhlcvDocument } from "../../../models/ohlcv.js";
 
 class CryptowatchOhlcv {
@@ -54,11 +53,12 @@ class CryptowatchOhlcv {
         console.log(error);
       });
   }
-  async insert(data: OhlcvDocument) {
+  async insert(data: any) {
     try {
       await this.ohlcvModel.insertMany(data);
     } catch (error) {
       console.log(error);
+      console.log("Error inserting data");
     }
   }
 }

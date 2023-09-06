@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 
 import Header from "../components/header/Index";
+import Tab from "../components/charts/controls/tab/Index";
+import SelectCurrency from "../components/charts/controls/select-currency/Index";
 import CandlestickChart from "../components/charts/CandlestickChart";
 import VolumeBarChart from "../components/charts/VolumeBarChart";
 import { selectChartPeriod, selectCurrencyPair } from "../store/slicers/chart";
@@ -17,10 +19,16 @@ const Home: React.FC = () => {
   useFetchConfigs("cryptowatch");
 
   return (
-    <div className="bg-gray-900 text-gray-50">
+    <div className="bg-gray-900 text-gray-50 min-h-screen p-1">
       <Header />
-      <CandlestickChart data={ohlcv.ohlc} />
-      <VolumeBarChart data={ohlcv.volume} />
+      <SelectCurrency />
+      <Tab />
+
+      {/* This color and font designation is for tooltips */}
+      <div className="text-gray-900 text-xs">
+        <CandlestickChart data={ohlcv.ohlc} />
+        <VolumeBarChart data={ohlcv.volume} />
+      </div>
     </div>
   );
 };

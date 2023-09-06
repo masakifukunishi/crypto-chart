@@ -32,18 +32,25 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ data }) => {
         id: "candles",
         type: "candlestick",
         height: 320,
-        background: "#1a202c",
-        foreColor: "#fff",
+        foreColor: "#F9FAFB",
         toolbar: {
           show: false,
         },
       },
       xaxis: {
         type: "datetime",
+        tooltip: {
+          enabled: true,
+        },
+        labels: {
+          minWidth: 40,
+          maxWidth: 40,
+        },
       },
       yaxis: {
         tooltip: {
           enabled: true,
+          theme: false,
         },
         labels: {
           minWidth: 40,
@@ -51,6 +58,12 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ data }) => {
           formatter: (val: number) => {
             return val.toFixed(0);
           },
+        },
+      },
+      tooltip: {
+        style: {
+          fontSize: "6px",
+          fontFamily: undefined,
         },
       },
     };

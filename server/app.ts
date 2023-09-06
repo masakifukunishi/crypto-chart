@@ -2,10 +2,13 @@ import path from "path";
 import express, { Express, Request, Response, NextFunction } from "express";
 
 import apiRoutes from "./api-routes/index.js";
-import "./helpers/db.js";
+import db from "./helpers/mongodb.js";
 
 const app: Express = express();
 const port: number = Number(process.env.PORT) || 8080;
+
+// connect to MongoDB
+db.connect();
 
 app.use(express.static("dist"));
 

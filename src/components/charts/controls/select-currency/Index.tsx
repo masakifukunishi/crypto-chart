@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import { selecCryptowatchConfig } from "../../../store/slicers/config";
-import { setCurrencyPair } from "../../../store/slicers/chart";
+import { selecCryptowatchConfig } from "../../../../store/slicers/config";
+import { setCurrencyPair } from "../../../../store/slicers/chart";
 
 interface CurrencyPair {
   displayName: string;
@@ -28,7 +28,7 @@ const Index = () => {
     <>
       <select
         onChange={handleChange}
-        className="border text-sm rounded-lg block w-full p-2 bg-gray-700 border-gray-600 hover:border-red-500 focus:border-red-500 cursor-pointer"
+        className="border text-xs font-semibold rounded-lg block w-full px-2 py-1.5 bg-gray-700 border-gray-600 hover:border-blue-500 focus:border-blue-500 cursor-pointer"
       >
         {currencyOptions.map((pair: CurrencyPair) => (
           <option key={pair.value} value={pair.value}>
