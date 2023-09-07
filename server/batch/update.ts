@@ -6,9 +6,8 @@ import { CryptowatchConfig } from "../types/config.js";
 import CryptowatchOhlcv from "./lib/cryptowatch/ohlcv.js";
 
 async function processData() {
-  db.connect();
-
   try {
+    console.log("update batch started");
     const cryptowatchConfig: CryptowatchConfig = config.get("cryptowatch");
     const quoteAssets = cryptowatchConfig.quoteAssets;
     const baseAsset = cryptowatchConfig.baseAsset;
@@ -32,11 +31,13 @@ async function processData() {
       })
     );
   } finally {
-    db.close();
+    console.log("update batch completed");
   }
 }
 
+console.log("update batch running");
+
+db.connect();
 cron.schedule("* * * * *", () => {
-  console.log("Running a daily batch job");
   processData();
 });
