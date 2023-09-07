@@ -39,7 +39,10 @@ class CryptowatchOhlcv {
         const data = response.data.result[this.period].slice(-this.dataLimit);
         const formattedData = data.map((d: number[]) => {
           return {
-            time: d[0],
+            // Cryptowatch API returns time in seconds, but we want milliseconds
+            closeTime: d[0] * 1000,
+            // 1 day ago
+            targetTime: (d[0] - 24 * 60 * 60) * 1000,
             open: d[1],
             high: d[2],
             low: d[3],
@@ -60,6 +63,22 @@ class CryptowatchOhlcv {
       console.log(error);
       console.log("Error inserting data");
     }
+  }
+
+  async updatePreviousData(newData: OhlcvDocument) {
+    const previousData = await this.ohlcvModel.findOne({ closeTime: newData.closeTime - 86400000 });
+
+    if (previousData) {
+      await this.ohlcvModel.findOneAndUpdate({ closeTime: previousData.closeTime }, { $set: newData }, { new: true });
+    }
+  }
+
+  async findDataByCloseTime(closeTime: number) {
+    return this.ohlcvModel.findOne({ closeTime });
+  }
+
+  async updateDataByCloseTime(closeTime: number, newData: OhlcvDocument) {
+    return this.ohlcvModel.findOneAndUpdate({ closeTime }, { $set: newData }, { new: true });
   }
 }
 
