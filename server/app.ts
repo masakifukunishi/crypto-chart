@@ -7,8 +7,8 @@ import db from "./helpers/mongodb.js";
 const app: Express = express();
 const port: number = Number(process.env.PORT) || 8080;
 
-// Set timezone to GMT
-process.env.TZ = "GMT";
+// Set timezone to UTC
+// process.env.TZ = "UTC";
 
 // connect to MongoDB
 db.connect();

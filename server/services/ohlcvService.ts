@@ -26,7 +26,7 @@ export default class OhlcvService {
 
     const ohlcvRecords = await OhlcvModel.find({
       targetTime: { $gte: startDate, $lte: endDate },
-    });
+    }).sort({ closeTime: 1 });
     const formattedOhlc = ohlcvRecords.map((record) => {
       return {
         x: record.targetTime,

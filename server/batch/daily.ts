@@ -1,5 +1,5 @@
 import config from "config";
-import cron from "node-cron";
+// import cron from "node-cron";
 
 import db from "../helpers/mongodb.js";
 import { CryptowatchConfig } from "../types/config.js";
@@ -17,14 +17,17 @@ async function processData() {
 
     await Promise.all(
       quoteAssets.map(async (quoteAsset: string) => {
-        const ohlcv = new CryptowatchOhlcv(exchange, quoteAsset, baseAsset, dailyDataNum);
+        // dailyDataNum + 1 because I need to get the previous day's data as well
+        const ohlcv = new CryptowatchOhlcv(exchange, quoteAsset, baseAsset, dailyDataNum + 1);
         const data = await ohlcv.get();
-        const existingData = await ohlcv.findDataByCloseTime(data[0].closeTime);
+        // Reverse the data so that the most recent data is first
+        const reversedData = data.reverse();
+        const existingData = await ohlcv.findDataByCloseTime(reversedData[0].closeTime);
         if (existingData) {
-          await ohlcv.updateDataByCloseTime(data[0].closeTime, data[0]);
+          await ohlcv.updateDataByCloseTime(reversedData[0].closeTime, reversedData[0]);
         } else {
-          ohlcv.insert(data);
-          await ohlcv.updatePreviousData(data[0]);
+          ohlcv.insert(reversedData[0]);
+          await ohlcv.updatePreviousData(reversedData[1]);
         }
       })
     );
@@ -33,6 +36,6 @@ async function processData() {
   }
 }
 
-cron.schedule("0 0 * * *", () => {
-  processData();
-});
+// cron.schedule("0 0 * * *", () => {
+processData();
+// });
