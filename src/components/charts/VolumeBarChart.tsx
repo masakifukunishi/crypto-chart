@@ -18,7 +18,7 @@ const VolumeBarChart: React.FC<VolumeBarChartProps> = ({ data }) => {
         },
       ],
       chart: {
-        height: 135,
+        height: 168,
         type: "bar",
         foreColor: "#F9FAFB",
         toolbar: {
@@ -52,13 +52,21 @@ const VolumeBarChart: React.FC<VolumeBarChartProps> = ({ data }) => {
       },
       xaxis: {
         type: "datetime",
+        labels: {
+          style: {
+            fontSize: "14px",
+          },
+        },
       },
       yaxis: {
         labels: {
-          minWidth: 40,
-          maxWidth: 40,
+          minWidth: 43,
+          maxWidth: 43,
           formatter: (val: number) => {
             return val.toFixed(0);
+          },
+          style: {
+            fontSize: "14px",
           },
         },
       },

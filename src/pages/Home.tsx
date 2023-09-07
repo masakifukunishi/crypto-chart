@@ -25,7 +25,7 @@ const Home: React.FC = () => {
       <Tab />
 
       {/* This color and font designation is for tooltips */}
-      <div className="text-gray-900 text-xs">
+      <div className="text-gray-900 text-sm">
         <CandlestickChart data={ohlcv.ohlc} />
         <VolumeBarChart data={ohlcv.volume} />
       </div>
