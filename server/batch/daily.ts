@@ -1,5 +1,5 @@
 import config from "config";
-// import cron from "node-cron";
+import cron from "node-cron";
 
 import db from "../helpers/mongodb.js";
 import { CryptowatchConfig } from "../types/config.js";
@@ -33,6 +33,6 @@ async function processData() {
   }
 }
 
-// cron.schedule("0 0 * * *", () => {
-processData();
-// });
+cron.schedule("0 0 * * *", () => {
+  processData();
+});
