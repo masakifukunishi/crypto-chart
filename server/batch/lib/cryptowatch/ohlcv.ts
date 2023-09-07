@@ -64,6 +64,22 @@ class CryptowatchOhlcv {
       console.log("Error inserting data");
     }
   }
+
+  async updatePreviousData(newData: OhlcvDocument) {
+    const previousData = await this.ohlcvModel.findOne({ closeTime: newData.closeTime - 86400000 });
+
+    if (previousData) {
+      await this.ohlcvModel.findOneAndUpdate({ closeTime: previousData.closeTime }, { $set: newData }, { new: true });
+    }
+  }
+
+  async findDataByCloseTime(closeTime: number) {
+    return this.ohlcvModel.findOne({ closeTime });
+  }
+
+  async updateDataByCloseTime(closeTime: number, newData: OhlcvDocument) {
+    return this.ohlcvModel.findOneAndUpdate({ closeTime }, { $set: newData }, { new: true });
+  }
 }
 
 export default CryptowatchOhlcv;

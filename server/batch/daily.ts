@@ -1,5 +1,5 @@
 import config from "config";
-import cron from "node-cron";
+// import cron from "node-cron";
 
 import db from "../helpers/mongodb.js";
 import { CryptowatchConfig } from "../types/config.js";
@@ -19,7 +19,13 @@ async function processData() {
       quoteAssets.map(async (quoteAsset: string) => {
         const ohlcv = new CryptowatchOhlcv(exchange, quoteAsset, baseAsset, dailyDataNum);
         const data = await ohlcv.get();
-        ohlcv.insert(data);
+        const existingData = await ohlcv.findDataByCloseTime(data[0].closeTime);
+        if (existingData) {
+          await ohlcv.updateDataByCloseTime(data[0].closeTime, data[0]);
+        } else {
+          ohlcv.insert(data);
+          await ohlcv.updatePreviousData(data[0]);
+        }
       })
     );
   } finally {
@@ -27,6 +33,6 @@ async function processData() {
   }
 }
 
-cron.schedule("0 0 * * *", () => {
-  processData;
-});
+// cron.schedule("0 0 * * *", () => {
+processData();
+// });
