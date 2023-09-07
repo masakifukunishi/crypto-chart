@@ -38,6 +38,7 @@ async function processData() {
 console.log("update batch running");
 
 db.connect();
-cron.schedule("* * * * *", () => {
+// Run every 8 hours
+cron.schedule("0 */8 * * *", () => {
   processData();
 });
