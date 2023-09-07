@@ -65,11 +65,10 @@ class CryptowatchOhlcv {
     }
   }
 
-  async updatePreviousData(newData: OhlcvDocument) {
-    const previousData = await this.ohlcvModel.findOne({ closeTime: newData.closeTime - 86400000 });
-
+  async updatePreviousData(data: OhlcvDocument) {
+    const previousData = await this.ohlcvModel.findOne({ closeTime: data.closeTime });
     if (previousData) {
-      await this.ohlcvModel.findOneAndUpdate({ closeTime: previousData.closeTime }, { $set: newData }, { new: true });
+      await this.ohlcvModel.findOneAndUpdate({ closeTime: previousData.closeTime }, { $set: data }, { new: true });
     }
   }
 
