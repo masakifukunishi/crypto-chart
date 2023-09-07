@@ -45,6 +45,9 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ data }) => {
         labels: {
           minWidth: 40,
           maxWidth: 40,
+          style: {
+            fontSize: "14px",
+          },
         },
       },
       yaxis: {
@@ -53,17 +56,14 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ data }) => {
           theme: false,
         },
         labels: {
-          minWidth: 40,
-          maxWidth: 40,
+          minWidth: 43,
+          maxWidth: 43,
           formatter: (val: number) => {
             return val.toFixed(0);
           },
-        },
-      },
-      tooltip: {
-        style: {
-          fontSize: "6px",
-          fontFamily: undefined,
+          style: {
+            fontSize: "14px",
+          },
         },
       },
     };
