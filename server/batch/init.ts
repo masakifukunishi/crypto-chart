@@ -5,6 +5,7 @@ import { CryptowatchConfig } from "../types/config.js";
 import CryptowatchOhlcv from "./lib/cryptowatch/ohlcv.js";
 
 async function processData() {
+  console.log("init batch started");
   db.connect();
 
   const cryptowatchConfig: CryptowatchConfig = config.get("cryptowatch");
@@ -23,8 +24,8 @@ async function processData() {
     );
   } finally {
     db.close();
+    console.log("init batch completed");
   }
 }
 
-console.log("Running an initial batch job");
 processData();
