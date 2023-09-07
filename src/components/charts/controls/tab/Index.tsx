@@ -14,7 +14,7 @@ const Index = () => {
   };
 
   return (
-    <ul className="flex flex-wrap text-xs font-medium text-center border-b border-gray-700">
+    <ul className="flex flex-wrap  font-medium text-center border-b border-gray-700">
       <TabItem
         onTabChange={() => handleTabChange(chartConstant.CHART_PERIOD.ONE_YEAR.value)}
         isActive={period === chartConstant.CHART_PERIOD.ONE_YEAR.value || !period}
