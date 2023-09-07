@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "npm run batch-init && (npm run batch-update & npm run serve)",
+    "start": "npm run serve & npm run batch-update",
     "build": "npm-run-all build-client build-server",
     "build-client": "tsc && vite build",
     "build-server": "tsc -p tsconfig.server.json",
