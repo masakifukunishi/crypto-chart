@@ -26,4 +26,5 @@ async function processData() {
   }
 }
 
+console.log("Running an initial batch job");
 processData();

@@ -37,5 +37,6 @@ async function processData() {
 }
 
 cron.schedule("* * * * *", () => {
+  console.log("Running a daily batch job");
   processData();
 });
