@@ -1,12 +1,12 @@
 import axios from "axios";
 
-export function setupAxiosInterceptors() {
+export const setupAxiosInterceptors = () => {
   axios.interceptors.response.use(
-    function (response) {
+    (response) => {
       return response;
     },
-    function (error) {
+    (error) => {
       return Promise.reject(error.response.data.msg);
     }
   );
-}
+};
