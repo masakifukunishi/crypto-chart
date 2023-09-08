@@ -1,4 +1,6 @@
 # Crypto Chart
+![home](/readme-resources/home-screenshot.png)
+
 ## Demo
 //
 
