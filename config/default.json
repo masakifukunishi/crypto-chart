@@ -3,7 +3,7 @@
     "apiUrl": "https://api.cryptowat.ch",
     "exchange": "bitfinex",
     "baseAsset": "usd",
-    "quoteAssets": ["btc"],
+    "quoteAssets": ["btc", "eth"],
     "initDataNum": 365,
     "dailyDataNum": 1,
     "period": {
