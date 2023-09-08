@@ -1,9 +1,9 @@
-# Crypt Chart
+# Crypto Chart
 ## Demo
 //
 
 ## Summary
-Crypt Chart is a full-stack [MERN](https://www.geeksforgeeks.org/mern-stack/) app that lets users view candlestick charts of cryptocurrencies for selected asset pairs and periods.
+Crypto Chart is a full-stack [MERN](https://www.geeksforgeeks.org/mern-stack/) app that lets users view candlestick charts of cryptocurrencies for selected asset pairs and periods.
 
 ## About Settings
 - Data is retrieved every 6 hours from Cryotowatch
