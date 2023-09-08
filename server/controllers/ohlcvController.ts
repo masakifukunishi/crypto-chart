@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 
 import OhlcvService from "../services/ohlcvService.js";
 
-export async function getOhlcv(req: Request, res: Response) {
+export const getOhlcv = async (req: Request, res: Response) => {
   const { period, currencyPair } = req.query;
 
   try {
@@ -12,4 +12,4 @@ export async function getOhlcv(req: Request, res: Response) {
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
-}
+};

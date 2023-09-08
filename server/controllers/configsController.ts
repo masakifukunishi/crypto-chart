@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 
 import { CryptowatchConfig } from "../types/config.js";
 
-export async function getCryptowatchConfigs(_req: Request, res: Response) {
+export const getCryptowatchConfigs = async (_req: Request, res: Response) => {
   const cryptowatchConfig: CryptowatchConfig = config.get("cryptowatch");
   res.json(cryptowatchConfig);
-}
+};

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
-export function requestErrorHandler(controller: (req: Request, res: Response) => Promise<void>) {
-  return async function (req: Request, res: Response, next: NextFunction) {
+export const requestErrorHandler = (controller: (req: Request, res: Response) => Promise<void>) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
     try {
       return await controller(req, res);
       // Disable the explicit 'any' rule here because the error type is dynamic.
@@ -10,4 +10,4 @@ export function requestErrorHandler(controller: (req: Request, res: Response) =>
       next(err.stack);
     }
   };
-}
+};

@@ -4,7 +4,7 @@ import db from "../helpers/mongodb.js";
 import { CryptowatchConfig } from "../types/config.js";
 import CryptowatchOhlcv from "./lib/cryptowatch/ohlcv.js";
 
-async function processData() {
+const processData = async () => {
   console.log("init batch started");
   db.connect();
 
@@ -26,6 +26,6 @@ async function processData() {
     db.close();
     console.log("init batch completed");
   }
-}
+};
 
 processData();

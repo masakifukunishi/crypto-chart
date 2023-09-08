@@ -27,7 +27,7 @@ app.get("*", (_req: Request, res: Response) => {
 // This function is marked as having an unused 'err' parameter, but it's necessary
 // as an Express error-handling middleware.
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use(function (err: Error, _req: Request, res: Response, _next: NextFunction): void {
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction): void => {
   console.error(err.stack);
   res.status(500).json({ msg: "Internal Server Error" });
 });
