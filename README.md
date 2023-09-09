@@ -66,7 +66,7 @@ npm install
 ```bash
 cp .env.example .env
 ```
-```MONGODB_URI``` is the URI of the MongoDB database to be used.
+`MONGODB_URI` is the URI of the MongoDB database to be used.
 
 ### 4. Set config
 If you want to change the exchange and the asset pairs, change the settings in config/default.json.
