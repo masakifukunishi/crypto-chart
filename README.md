@@ -95,7 +95,7 @@ npm run dev
 ```
 
 ## How to build
-### 1. 1-5. Same as "How to run"
+### 1. The same as 1-5 of 'How to run'
 
 ### 2. Build frontend and backend
 ```bash
