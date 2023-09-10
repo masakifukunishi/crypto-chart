@@ -84,7 +84,7 @@ If you want to change the exchange and the asset pairs, change the settings in c
 ```
 [/config/default.json](/config/default.json)
 
-For the list of exchanges and asset pairs, see the following links.
+For the list of exchanges and asset pairs, see the following link.
 
 https://docs.cryptowat.ch/rest-api/markets/list
 
