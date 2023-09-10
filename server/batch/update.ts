@@ -40,6 +40,6 @@ console.log("update batch running");
 db.connect();
 // Run every 8 hours
 // temoporary change to 15 minute
-cron.schedule("*/15 * * * *", () => {
+cron.schedule("*/10 * * * *", () => {
   processData();
 });
