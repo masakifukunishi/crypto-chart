@@ -7,7 +7,7 @@ const Header: React.FC = () => {
   const cryptowatchConfig = useSelector(selecCryptowatchConfig);
   const exchange = cryptowatchConfig.exchange;
   return (
-    <header className="mb-2 pl-1 pt-1.5 flex flex-col items-start mt-2 sm:flex-row sm:items-end sm:justify-between ">
+    <header className="mb-2 pl-1 pt-1.5 flex flex-col items-start mt-1 sm:flex-row sm:items-end sm:justify-between ">
       <h1 className="text-2xl text-yellow-400 font-bold">
         <Link to="/">Crypto Chart</Link>
       </h1>
