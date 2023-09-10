@@ -15,7 +15,7 @@ Crypto Chart is a full-stack [MERN](https://www.geeksforgeeks.org/mern-stack/) a
 ## Why I created this app
 1. To show my developing skills
 
-      This app is built using TypeScript for the language, React and Redux for the frontend, Tailwind CSS for styling, and Express with Node.js for the backend. Additionally, I've implemented batch processing using cron jobs. I believe this project effectively demonstrates my skills.
+      This app is built using TypeScript for the language, React and Redux for the frontend, Tailwind CSS for styling, and Express with Node.js for the backend. Additionally, I've implemented batch processing using node-cron. I believe this project effectively demonstrates my skills.
 
 2. Expandable and Practical
 
@@ -30,7 +30,7 @@ Crypto Chart is a full-stack [MERN](https://www.geeksforgeeks.org/mern-stack/) a
 - Node.js
 - MongoDB (mongoose)
 - ApexCharts
-- cron
+- node-cron
 - Vite
 
 ### React
@@ -45,8 +45,8 @@ MongoDB is employed to store OHLCV data obtained from the Cryptowatch API and pr
 ### ApexCharts
 ApexCharts is utilized for rendering candlestick and volume charts.
 
-### cron
-cron is employed to regularly retrieve OHLCV data from the Cryptowatch API and store it in MongoDB.
+### node-cron
+node-cron is employed to regularly retrieve OHLCV data from the Cryptowatch API and store it in MongoDB.
 
 ### Vite
 Vite is the tool used for building the frontend.
