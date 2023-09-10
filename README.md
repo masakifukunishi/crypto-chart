@@ -8,7 +8,7 @@
 Crypto Chart is a full-stack [MERN](https://www.geeksforgeeks.org/mern-stack/) app that lets users view candlestick charts of cryptocurrencies for selected asset pairs and periods.
 
 ## About Settings
-- Data is retrieved every 8 hours from Cryotowatch
+- Data is retrieved every 6 hours from Cryotowatch
 - You can change the exchange and the asset pairs by changing the settings in config/default.json
 - Only UTC Time Zone is supported for now
 
