@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 
-import Header from "../components/header/Index";
-import Tab from "../components/charts/controls/tab/Index";
-import SelectCurrency from "../components/charts/controls/select-currency/Index";
+import Header from "../components/header";
+import Tab from "../components/charts/controls/tab";
+import SelectCurrency from "../components/charts/controls/select-currency";
 import CandlestickChart from "../components/charts/CandlestickChart";
 import VolumeBarChart from "../components/charts/VolumeBarChart";
 import { selectChartPeriod, selectCurrencyPair } from "../store/slicers/chart";
