@@ -12,8 +12,8 @@ Crypto Chart is a full-stack [MERN](https://www.geeksforgeeks.org/mern-stack/) a
 - You can change the exchange and the asset pairs by changing the settings in config/default.json
 - Only UTC Time Zone is supported for now
 
-## Why I created this app
-1. To show my developing skills
+## Motivation
+1. Demonstrating my development skills
 
       This app is built using TypeScript for the language, React and Redux for the frontend, Tailwind CSS for styling, and Express with Node.js for the backend. Additionally, I've implemented batch processing using node-cron. I believe this project effectively demonstrates my skills.
 
