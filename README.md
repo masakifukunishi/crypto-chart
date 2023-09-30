@@ -22,16 +22,21 @@ Crypto Chart is a full-stack [MERN](https://www.geeksforgeeks.org/mern-stack/) a
       While the app currently offers basic functionality, there is potential to enhance its practicality by incorporating features such as acquiring candlestick data for shorter periods, integrating technical indicators, and more.
 
 ## Language and Libraries
-- TypeScript
-- React
-- Redux, Redux Toolkit
-- Tailwind CSS
-- Express
-- Node.js
-- MongoDB (mongoose)
-- ApexCharts
-- node-cron
-- Vite
+
+- Client
+    - TypeScript
+    - React
+    - Redux, Redux Toolkit
+    - Tailwind CSS
+    - ApexCharts
+    - Vite
+
+- Server
+    - TypeScript
+    - Express
+    - Node.js
+    - MongoDB (mongoose)
+    - node-cron
 
 ### React
 Data fetching from the backend in React is facilitated using custom hooks, making it explicit when the API is called.
@@ -39,17 +44,17 @@ Data fetching from the backend in React is facilitated using custom hooks, makin
 ### Redux
 The selected asset pair and period are stored in the Redux store. Upon accessing the home screen, configuration and constant data are fetched from the server side and stored in Redux.
 
-### MongoDB
-MongoDB is employed to store OHLCV data obtained from the Cryptowatch API and provide it upon server request.
-
 ### ApexCharts
 ApexCharts is utilized for rendering candlestick and volume charts.
 
-### node-cron
-node-cron is employed to regularly retrieve OHLCV data from the Cryptowatch API and store it in MongoDB.
-
 ### Vite
 Vite is the tool used for building the frontend.
+
+### MongoDB
+MongoDB is employed to store OHLCV data obtained from the Cryptowatch API and provide it upon server request.
+
+### node-cron
+node-cron is employed to regularly retrieve OHLCV data from the Cryptowatch API and store it in MongoDB.
 
 ## Architecture
 ![architecture](https://github.com/masakifukunishi/crypto-chart/assets/42294938/5391630f-3900-4632-a773-34629eab91f2)
