@@ -1,5 +1,5 @@
 # Crypto Chart
-![home](/readme-resources/home-screenshot.png)
+![home-screenshot](https://github.com/masakifukunishi/crypto-chart/assets/42294938/ab5fb783-fff8-48fd-a4fd-a5257421486d)
 
 ## Demo
 [https://crypto-chart-1r7g.onrender.com](https://crypto-chart-1r7g.onrender.com/)
@@ -52,24 +52,24 @@ node-cron is employed to regularly retrieve OHLCV data from the Cryptowatch API 
 Vite is the tool used for building the frontend.
 
 ## Architecture
-![architecture](/readme-resources/architecture.png)
+![architecture](https://github.com/masakifukunishi/crypto-chart/assets/42294938/5391630f-3900-4632-a773-34629eab91f2)
 
 ## How to run
 ### 1. Clone this repository
    
 ### 2. Install dependencies
 ```bash
-npm install
+npm run install-all
 ```
 
 ### 3. Set environment variables
 ```bash
-cp .env.example .env
+cp server/.env.example server/.env
 ```
 `MONGODB_URI` is the URI of the MongoDB database to be used.
 
 ### 4. Set config
-If you want to change the exchange and the asset pairs, change the settings in config/default.json.
+If you want to change the exchange and the asset pairs, change the settings in server/config/default.json.
 
 ```json
 {
