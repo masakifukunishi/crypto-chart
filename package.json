@@ -4,18 +4,21 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "npm run serve & npm run batch-update",
+    "init-project": "npm-run-all install-client install-server",
     "build": "npm-run-all build-client build-server",
-    "build-client": "",
-    "build-server": "",
-    "batch-init": "",
-    "batch-update": "",
-    "serve": "",
+    "start": "npm run serve & npm run batch-update",
     "dev": "npm-run-all --parallel dev-server dev-client",
+    "install-client": "npm install --prefix client",
+    "install-server": "npm install --prefix server",
+    "build-client": "npm run build --prefix client",
+    "build-server": "npm run build --prefix server",
+    "batch-init": "npm run batch-init --prefix server",
+    "batch-update": "npm run batch-update --prefix server",
+    "serve": "npm run serve --prefix server",
     "dev-server": "npm run dev --prefix server",
     "dev-client": "npm run dev --prefix client",
-    "dev-batch-init": "",
-    "dev-batch-update": ""
+    "dev-batch-init": "npm run dev-batch-init --prefix server",
+    "dev-batch-update": "npm run dev-batch-update --prefix server"
   },
   "dependencies": {
     "npm-run-all": "^4.1.5"

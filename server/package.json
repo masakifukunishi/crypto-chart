@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "tsc -p tsconfig.server.json",
+    "build": "tsc",
     "dev": "nodemon --esm app.ts",
     "serve": "node dist/app.js",
     "batch-init": "node dist/batch/init.js",
