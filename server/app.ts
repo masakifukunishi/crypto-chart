@@ -13,14 +13,14 @@ process.env.TZ = "UTC";
 // connect to MongoDB
 db.connect();
 
-app.use(express.static("dist"));
+app.use(express.static("../client/dist"));
 
 app.use(express.json());
 
 app.use("/api", apiRoutes);
 
 app.get("*", (_req: Request, res: Response) => {
-  const pathIndex: string = path.resolve("dist", "index.html");
+  const pathIndex: string = path.resolve("../client/dist", "index.html");
   res.status(404).sendFile(pathIndex);
 });
 
