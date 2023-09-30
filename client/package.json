@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc && vite build",
-    "dev": "vite"
+    "dev": "vite",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
@@ -23,6 +24,10 @@
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
     "autoprefixer": "^10.4.15",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
     "postcss": "^8.4.29",
     "prettier": "^3.0.3",
     "react-router-dom": "^6.15.0",
