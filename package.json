@@ -6,7 +6,7 @@
   "scripts": {
     "install-all": "npm install && npm-run-all install-client install-server",
     "build": "npm-run-all build-client build-server",
-    "start": "npm-run-all serve batch-update",
+    "start": "npm-run-all --parallel serve batch-update",
     "dev": "npm-run-all --parallel dev-server dev-client",
     "install-client": "npm install --prefix client",
     "install-server": "npm install --prefix server",
