@@ -6,35 +6,18 @@
   "scripts": {
     "start": "npm run serve & npm run batch-update",
     "build": "npm-run-all build-client build-server",
-    "build-client": "tsc && vite build",
-    "build-server": "tsc -p tsconfig.server.json",
-    "batch-init": "node server/dist/batch/init.js",
-    "batch-update": "node server/dist/batch/update.js",
-    "serve": "node server/dist/app.js",
+    "build-client": "",
+    "build-server": "",
+    "batch-init": "",
+    "batch-update": "",
+    "serve": "",
     "dev": "npm-run-all --parallel dev-server dev-client",
-    "dev-server": "nodemon --esm server/app.ts",
+    "dev-server": "npm run dev --prefix server",
     "dev-client": "npm run dev --prefix client",
     "dev-batch-init": "npx ts-node --esm server/batch/init.ts",
     "dev-batch-update": "npx ts-node --esm server/batch/update.ts"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.5",
-    "@types/config": "^3.3.0",
-    "@types/node-cron": "^3.0.8",
-    "axios": "^1.5.0",
-    "config": "^3.3.9",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "mongodb": "^6.0.0",
-    "mongoose": "^7.5.0",
-    "node-cron": "^3.0.2",
     "npm-run-all": "^4.1.5"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.17",
-    "@types/node": "^20.5.9",
-    "nodemon": "^3.0.1",
-    "postcss": "^8.4.29",
-    "typescript": "^5.2.2"
   }
 }

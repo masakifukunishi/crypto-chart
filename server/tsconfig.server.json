@@ -7,10 +7,10 @@
     "strict": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
-    "rootDir": "./server/",
-    "outDir": "./server/dist"
+    "rootDir": "./",
+    "outDir": "./dist"
   },
-  "include": ["./server"],
+  "include": ["./"],
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node"
