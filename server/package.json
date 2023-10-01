@@ -5,13 +5,13 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon --esm app.ts",
+    "dev": "nodemon --esm src/app.ts",
     "serve": "node dist/app.js",
     "batch-init": "node dist/batch/init.js",
     "batch-update": "node dist/batch/update.js",
     "dev-batch-init": "npx ts-node --esm batch/init.ts",
     "dev-batch-update": "npx ts-node --esm batch/update.ts",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint ./src --ext .ts"
   },
   "dependencies": {
     "@types/config": "^3.3.0",
