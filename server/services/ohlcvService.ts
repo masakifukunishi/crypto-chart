@@ -4,6 +4,15 @@ import { CryptowatchConfig } from "../types/config.js";
 import Ohlcv from "../models/ohlcv.js";
 import { CHART_CONSTANT } from "../constants/chart.js";
 
+interface FormattedChartData {
+  ohlc: { x: number; y: number[] }[];
+  volume: { x: number; y: number }[];
+}
+interface DateRange {
+  startDate: number;
+  endDate: number;
+}
+
 export default class OhlcvService {
   private cryptowatchConfig: CryptowatchConfig;
   private period: string;
@@ -15,11 +24,11 @@ export default class OhlcvService {
     this.currencyPair = currencyPair || this.getDefaultCurrencyPair();
   }
 
-  getDefaultCurrencyPair() {
+  getDefaultCurrencyPair(): string {
     return `${this.cryptowatchConfig.quoteAssets[0]}_${this.cryptowatchConfig.baseAsset}`;
   }
 
-  async getChartData() {
+  async getChartData(): Promise<FormattedChartData> {
     const collectionName = this.generateCollectionName();
     const OhlcvModel = Ohlcv(collectionName);
     const { startDate, endDate } = this.calculateDateRange();
@@ -49,11 +58,11 @@ export default class OhlcvService {
     return formattedChartData;
   }
 
-  generateCollectionName() {
+  generateCollectionName(): string {
     return `ohlcv_${this.currencyPair}`;
   }
 
-  calculateDateRange() {
+  calculateDateRange(): DateRange {
     const currentDate = new Date();
     let startDate = 0;
     let endDate = 0;

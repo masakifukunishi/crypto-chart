@@ -28,7 +28,7 @@ class CryptowatchOhlcv {
     this.ohlcvModel = Ohlcv(`ohlcv_${this.quoteAsset}_${this.baseAsset}`);
   }
 
-  async get() {
+  async get(): Promise<OhlcvDocument[]> {
     return axios
       .get(this.url, {
         params: {
@@ -56,7 +56,7 @@ class CryptowatchOhlcv {
         console.log(error);
       });
   }
-  async insert(data: OhlcvDocument) {
+  async insert(data: OhlcvDocument): Promise<void> {
     try {
       await this.ohlcvModel.insertMany(data);
     } catch (error) {
@@ -65,18 +65,18 @@ class CryptowatchOhlcv {
     }
   }
 
-  async updatePreviousData(data: OhlcvDocument) {
+  async updatePreviousData(data: OhlcvDocument): Promise<void> {
     const previousData = await this.ohlcvModel.findOne({ closeTime: data.closeTime });
     if (previousData) {
       await this.ohlcvModel.findOneAndUpdate({ closeTime: previousData.closeTime }, { $set: data }, { new: true });
     }
   }
 
-  async findDataByCloseTime(closeTime: number) {
+  async findDataByCloseTime(closeTime: number): Promise<OhlcvDocument | null> {
     return this.ohlcvModel.findOne({ closeTime });
   }
 
-  async updateDataByCloseTime(closeTime: number, newData: OhlcvDocument) {
+  async updateDataByCloseTime(closeTime: number, newData: OhlcvDocument): Promise<OhlcvDocument | null> {
     return this.ohlcvModel.findOneAndUpdate({ closeTime }, { $set: newData }, { new: true });
   }
 }
