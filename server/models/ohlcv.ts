@@ -1,4 +1,4 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, Document, Model } from "mongoose";
 
 export interface OhlcvDocument extends Document {
   closeTime: number;
@@ -42,6 +42,7 @@ const OhlcvSchema = new Schema<OhlcvDocument>({
 });
 
 // Ohlcv モデルを定義してエクスポート
-const Ohlcv = (collectionName: string) => model<OhlcvDocument>("Ohlcv", OhlcvSchema, collectionName);
+const Ohlcv: (collectionName: string) => Model<OhlcvDocument> = (collectionName: string) =>
+  model<OhlcvDocument>("Ohlcv", OhlcvSchema, collectionName);
 
 export default Ohlcv;

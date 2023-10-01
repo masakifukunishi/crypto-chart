@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 
 import OhlcvService from "../services/ohlcvService.js";
 
-export const getOhlcv = async (req: Request, res: Response) => {
+export const getOhlcv = async (req: Request, res: Response): Promise<void> => {
   const { period, currencyPair } = req.query;
 
   try {
