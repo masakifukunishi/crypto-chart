@@ -87,7 +87,7 @@ If you want to change the exchange and the asset pairs, change the settings in s
   }
 }
 ```
-[/config/default.json](/config/default.json)
+[server/config/default.json](server/config/default.json)
 
 For the list of exchanges and asset pairs, see the following link.
 
