@@ -1,13 +1,20 @@
 {
   "cryptowatch": {
-    "apiUrl": "https://api.cryptowat.ch",
-    "exchange": "bitfinex",
-    "baseAsset": "usd",
-    "quoteAssets": ["btc", "eth"],
+    "apiUrl": "https://api.kraken.com",
+    "baseAsset": {
+      "symbol": "ZUSD",
+      "altname": "USD"
+    },
+    "quoteAssets": [
+      {
+        "symbol": "XETH",
+        "altname": "ETH"
+      }
+    ],
     "initDataNum": 365,
     "dailyDataNum": 1,
     "period": {
-      "daily": 86400
+      "daily": 1440
     }
   }
 }

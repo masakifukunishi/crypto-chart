@@ -6,8 +6,16 @@ const initialState = {
   cryptowatch: {
     apiUrl: "",
     exchange: "",
-    baseAsset: "",
-    quoteAssets: [],
+    baseAsset: {
+      symbol: "",
+      altname: "",
+    },
+    quoteAssets: [
+      {
+        symbol: "",
+        altname: "",
+      },
+    ],
     initDataNum: 0,
     dailyDataNum: 0,
     period: {

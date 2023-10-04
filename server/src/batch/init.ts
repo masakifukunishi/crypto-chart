@@ -16,8 +16,8 @@ const processData = async () => {
 
   try {
     await Promise.all(
-      quoteAssets.map(async (quoteAsset: string) => {
-        const ohlcv = new CryptowatchOhlcv(exchange, quoteAsset, baseAsset, initDataNum);
+      quoteAssets.map(async (quoteAsset: { symbol: string; altname: string }) => {
+        const ohlcv = new CryptowatchOhlcv(exchange, quoteAsset.symbol, baseAsset.symbol, initDataNum);
         const data = await ohlcv.get();
         await ohlcv.insert(data);
       })

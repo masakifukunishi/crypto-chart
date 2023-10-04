@@ -8,7 +8,6 @@ import Ohlcv, { OhlcvDocument } from "../../../models/ohlcv.js";
 class CryptowatchOhlcv {
   private cryptowatchConfig: CryptowatchConfig;
   private period: number;
-  private exchange: string;
   private quoteAsset: string;
   private baseAsset: string;
   private pair: string;
@@ -19,24 +18,25 @@ class CryptowatchOhlcv {
   constructor(exchange: string, quoteAsset: string, baseAsset: string, dataLimit: number) {
     this.cryptowatchConfig = config.get("cryptowatch");
     this.period = this.cryptowatchConfig.period.daily;
-    this.exchange = exchange;
     this.quoteAsset = quoteAsset;
     this.baseAsset = baseAsset;
     this.pair = `${this.quoteAsset}${this.baseAsset}`;
     this.dataLimit = dataLimit;
-    this.url = `${this.cryptowatchConfig.apiUrl}/markets/${this.exchange}/${this.pair}/ohlc`;
-    this.ohlcvModel = Ohlcv(`ohlcv_${this.quoteAsset}_${this.baseAsset}`);
+    this.url = `${this.cryptowatchConfig.apiUrl}/0/public/OHLC?pair=${this.pair}`;
+    console.log(this.url);
+    this.ohlcvModel = Ohlcv(`kraken_ohlcv_${this.quoteAsset}_${this.baseAsset}`);
   }
 
   async get(): Promise<OhlcvDocument[]> {
     return axios
       .get(this.url, {
         params: {
-          periods: 86400,
+          interval: this.period,
         },
       })
       .then((response) => {
-        const data = response.data.result[this.period].slice(-this.dataLimit);
+        const data = response.data.result[this.pair].slice(-this.dataLimit);
+        console.log(data);
         const formattedData = data.map((d: number[]) => {
           return {
             // Cryptowatch API returns time in seconds, but we want milliseconds
@@ -47,7 +47,7 @@ class CryptowatchOhlcv {
             high: d[2],
             low: d[3],
             close: d[4],
-            volume: d[5],
+            volume: d[6],
           };
         });
         return formattedData;

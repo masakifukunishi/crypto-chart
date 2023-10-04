@@ -25,7 +25,7 @@ export default class OhlcvService {
   }
 
   getDefaultCurrencyPair(): string {
-    return `${this.cryptowatchConfig.quoteAssets[0]}_${this.cryptowatchConfig.baseAsset}`;
+    return `${this.cryptowatchConfig.quoteAssets[0].symbol}_${this.cryptowatchConfig.baseAsset.symbol}`;
   }
 
   async getChartData(): Promise<FormattedChartData> {
@@ -59,7 +59,7 @@ export default class OhlcvService {
   }
 
   generateCollectionName(): string {
-    return `ohlcv_${this.currencyPair}`;
+    return `kraken_ohlcv_${this.currencyPair}`;
   }
 
   calculateDateRange(): DateRange {

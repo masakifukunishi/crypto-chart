@@ -15,9 +15,9 @@ const processData = async () => {
     const dailyDataNum = cryptowatchConfig.dailyDataNum;
 
     await Promise.all(
-      quoteAssets.map(async (quoteAsset: string) => {
+      quoteAssets.map(async (quoteAsset: { symbol: string; altname: string }) => {
         // dailyDataNum + 1 because I need to get the previous day's data as well
-        const ohlcv = new CryptowatchOhlcv(exchange, quoteAsset, baseAsset, dailyDataNum + 1);
+        const ohlcv = new CryptowatchOhlcv(exchange, quoteAsset.symbol, baseAsset.symbol, dailyDataNum + 1);
         const data = await ohlcv.get();
         // Reverse the data so that the most recent data is first
         const reversedData = data.reverse();

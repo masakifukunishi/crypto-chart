@@ -12,9 +12,9 @@ const Index = () => {
   const cryptowatchConfig = useSelector(selecCryptowatchConfig);
   const baseAsset = cryptowatchConfig.baseAsset;
   const quoteAssets = cryptowatchConfig.quoteAssets;
-  const currencyOptions = quoteAssets.map((quoteAsset: string) => ({
-    displayName: `${quoteAsset.toUpperCase()} / ${baseAsset.toUpperCase()}`,
-    value: `${quoteAsset}_${baseAsset}`,
+  const currencyOptions = quoteAssets.map((quoteAsset: { symbol: string; altname: string }) => ({
+    displayName: `${quoteAsset.altname} / ${baseAsset.altname}`,
+    value: `${quoteAsset.symbol}_${baseAsset.symbol}`,
   }));
 
   const dispatch = useDispatch();
