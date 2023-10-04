@@ -59,7 +59,11 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ data }) => {
           minWidth: 48,
           maxWidth: 48,
           formatter: (val: number) => {
-            return val.toFixed(0);
+            if (val % 1 !== 0) {
+              return val.toFixed(1);
+            } else {
+              return val.toString();
+            }
           },
           style: {
             fontSize: "14px",

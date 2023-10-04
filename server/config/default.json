@@ -9,6 +9,10 @@
       {
         "symbol": "XETH",
         "altname": "ETH"
+      },
+      {
+        "symbol": "XXRP",
+        "altname": "XRP"
       }
     ],
     "initDataNum": 365,

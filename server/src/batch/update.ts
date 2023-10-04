@@ -20,9 +20,9 @@ const processData = async () => {
         const data = await ohlcv.get();
         // Reverse the data so that the most recent data is first
         const reversedData = data.reverse();
-        const existingData = await ohlcv.findDataByCloseTime(reversedData[0].closeTime);
+        const existingData = await ohlcv.findDataByCloseTime(reversedData[0].targetTime);
         if (existingData) {
-          await ohlcv.updateDataByCloseTime(reversedData[0].closeTime, reversedData[0]);
+          await ohlcv.updateDataByCloseTime(reversedData[0].targetTime, reversedData[0]);
         } else {
           ohlcv.insert(reversedData[0]);
           await ohlcv.updatePreviousData(reversedData[1]);

@@ -35,7 +35,7 @@ export default class OhlcvService {
 
     const ohlcvRecords = await OhlcvModel.find({
       targetTime: { $gte: startDate, $lte: endDate },
-    }).sort({ closeTime: 1 });
+    }).sort({ targetTime: 1 });
     const formattedOhlc = ohlcvRecords.map((record) => {
       return {
         x: record.targetTime,
@@ -59,7 +59,7 @@ export default class OhlcvService {
   }
 
   generateCollectionName(): string {
-    return `kraken_ohlcv_${this.currencyPair}`;
+    return `ohlcv_${this.currencyPair}`;
   }
 
   calculateDateRange(): DateRange {

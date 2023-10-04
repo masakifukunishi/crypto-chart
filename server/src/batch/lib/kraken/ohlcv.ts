@@ -23,8 +23,7 @@ class KrakenOhlcv {
     this.pair = `${this.quoteAsset}${this.baseAsset}`;
     this.dataLimit = dataLimit;
     this.url = `${this.krakenConfig.apiUrl}/0/public/OHLC?pair=${this.pair}`;
-    console.log(this.url);
-    this.ohlcvModel = Ohlcv(`kraken_ohlcv_${this.quoteAsset}_${this.baseAsset}`);
+    this.ohlcvModel = Ohlcv(`ohlcv_${this.quoteAsset}_${this.baseAsset}`);
   }
 
   async get(): Promise<OhlcvDocument[]> {
@@ -36,13 +35,10 @@ class KrakenOhlcv {
       })
       .then((response) => {
         const data = response.data.result[this.pair].slice(-this.dataLimit);
-        console.log(data);
         const formattedData = data.map((d: number[]) => {
           return {
             // Kraken API returns time in seconds, but we want milliseconds
-            closeTime: d[0] * 1000,
-            // 1 day ago
-            targetTime: (d[0] - 24 * 60 * 60) * 1000,
+            targetTime: d[0] * 1000,
             open: d[1],
             high: d[2],
             low: d[3],
@@ -66,18 +62,18 @@ class KrakenOhlcv {
   }
 
   async updatePreviousData(data: OhlcvDocument): Promise<void> {
-    const previousData = await this.ohlcvModel.findOne({ closeTime: data.closeTime });
+    const previousData = await this.ohlcvModel.findOne({ targetTime: data.targetTime });
     if (previousData) {
-      await this.ohlcvModel.findOneAndUpdate({ closeTime: previousData.closeTime }, { $set: data }, { new: true });
+      await this.ohlcvModel.findOneAndUpdate({ targetTime: previousData.targetTime }, { $set: data }, { new: true });
     }
   }
 
-  async findDataByCloseTime(closeTime: number): Promise<OhlcvDocument | null> {
-    return this.ohlcvModel.findOne({ closeTime });
+  async findDataByCloseTime(targetTime: number): Promise<OhlcvDocument | null> {
+    return this.ohlcvModel.findOne({ targetTime });
   }
 
-  async updateDataByCloseTime(closeTime: number, newData: OhlcvDocument): Promise<OhlcvDocument | null> {
-    return this.ohlcvModel.findOneAndUpdate({ closeTime }, { $set: newData }, { new: true });
+  async updateDataByCloseTime(targetTime: number, newData: OhlcvDocument): Promise<OhlcvDocument | null> {
+    return this.ohlcvModel.findOneAndUpdate({ targetTime }, { $set: newData }, { new: true });
   }
 }
 

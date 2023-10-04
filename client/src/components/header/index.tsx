@@ -8,7 +8,7 @@ const Header: React.FC = () => {
       </h1>
       <div className="text-sm mb-0.5">
         {/* Time Zone is hard coded, as timezone changes are currently not supported */}
-        <span className="px-1"></span> / <span className="px-1">Time Zone: UTC</span>
+        <span className="px-1">Time Zone: UTC</span>
       </div>
     </header>
   );
