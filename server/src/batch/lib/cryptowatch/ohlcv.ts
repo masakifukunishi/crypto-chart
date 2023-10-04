@@ -15,7 +15,7 @@ class CryptowatchOhlcv {
   private url: string;
   private ohlcvModel: Model<OhlcvDocument>;
 
-  constructor(exchange: string, quoteAsset: string, baseAsset: string, dataLimit: number) {
+  constructor(quoteAsset: string, baseAsset: string, dataLimit: number) {
     this.cryptowatchConfig = config.get("cryptowatch");
     this.period = this.cryptowatchConfig.period.daily;
     this.quoteAsset = quoteAsset;

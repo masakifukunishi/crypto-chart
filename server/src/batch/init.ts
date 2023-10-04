@@ -11,13 +11,12 @@ const processData = async () => {
   const cryptowatchConfig: CryptowatchConfig = config.get("cryptowatch");
   const quoteAssets = cryptowatchConfig.quoteAssets;
   const baseAsset = cryptowatchConfig.baseAsset;
-  const exchange = cryptowatchConfig.exchange;
   const initDataNum = cryptowatchConfig.initDataNum;
 
   try {
     await Promise.all(
       quoteAssets.map(async (quoteAsset: { symbol: string; altname: string }) => {
-        const ohlcv = new CryptowatchOhlcv(exchange, quoteAsset.symbol, baseAsset.symbol, initDataNum);
+        const ohlcv = new CryptowatchOhlcv(quoteAsset.symbol, baseAsset.symbol, initDataNum);
         const data = await ohlcv.get();
         await ohlcv.insert(data);
       })

@@ -5,7 +5,6 @@ import { RootState } from "../store";
 const initialState = {
   cryptowatch: {
     apiUrl: "",
-    exchange: "",
     baseAsset: {
       symbol: "",
       altname: "",

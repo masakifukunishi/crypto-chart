@@ -1,6 +1,5 @@
 export interface CryptowatchConfig {
   apiUrl: string;
-  exchange: string;
   baseAsset: {
     symbol: string;
     altname: string;
