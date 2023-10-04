@@ -9,7 +9,7 @@ Crypto Chart is a full-stack [MERN](https://www.geeksforgeeks.org/mern-stack/) a
 
 ## About Settings
 - Data is retrieved every 6 hours from Cryotowatch
-- You can change the exchange and the asset pairs by changing the settings in config/default.json
+- You can change the asset pairs by changing the settings in config/default.json
 - Only UTC Time Zone is supported for now
 
 ## Motivation
@@ -51,10 +51,10 @@ ApexCharts is utilized for rendering candlestick and volume charts.
 Vite is the tool used for building the frontend.
 
 ### MongoDB
-MongoDB is employed to store OHLCV data obtained from the Cryptowatch API and provide it upon server request.
+MongoDB is employed to store OHLCV data obtained from the Kraken API and provide it upon server request.
 
 ### node-cron
-node-cron is employed to regularly retrieve OHLCV data from the Cryptowatch API and store it in MongoDB.
+node-cron is employed to regularly retrieve OHLCV data from the Kraken API and store it in MongoDB.
 
 ## Architecture
 ![architecture](https://github.com/masakifukunishi/crypto-chart/assets/42294938/5391630f-3900-4632-a773-34629eab91f2)
@@ -74,24 +74,31 @@ cp server/.env.example server/.env
 `MONGODB_URI` is the URI of the MongoDB database to be used.
 
 ### 4. Set config
-If you want to change the exchange and the asset pairs, change the settings in server/config/default.json.
+If you want to change the asset pairs, change the settings in server/config/default.json.
 
 ```json
 {
-  "cryptowatch": {
+  "kraken": {
     ...
-    "exchange": "bitfinex",
-    "baseAsset": "usd",
-    "quoteAssets": ["btc", "eth"],
+    "baseAsset": {
+      "symbol": "ZUSD",
+      "altname": "USD"
+    },
+    "quoteAssets": [
+      {
+        "symbol": "XETH",
+        "altname": "ETH"
+      }
+    ],
     ...
   }
 }
 ```
 [server/config/default.json](server/config/default.json)
 
-For the list of exchanges and asset pairs, see the following link.
+For the list of asset pairs, see the following link.
 
-https://docs.cryptowat.ch/rest-api/markets/list
+https://docs.kraken.com/rest/#tag/Market-Data/operation/getTradableAssetPairs
 
 ### 5. Run batch processing to register initial ohlcv data
 ```bash

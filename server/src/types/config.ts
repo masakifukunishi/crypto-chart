@@ -1,8 +1,13 @@
-export interface CryptowatchConfig {
+export interface KrakenConfig {
   apiUrl: string;
-  exchange: string;
-  baseAsset: string;
-  quoteAssets: string[];
+  baseAsset: {
+    symbol: string;
+    altname: string;
+  };
+  quoteAssets: {
+    symbol: string;
+    altname: string;
+  }[];
   initDataNum: number;
   dailyDataNum: number;
   period: {

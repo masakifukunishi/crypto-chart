@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import { selecCryptowatchConfig } from "../../../../store/slicers/config";
+import { selecKrakenConfig } from "../../../../store/slicers/config";
 import { setCurrencyPair } from "../../../../store/slicers/chart";
 
 interface CurrencyPair {
@@ -9,12 +9,12 @@ interface CurrencyPair {
 }
 
 const Index = () => {
-  const cryptowatchConfig = useSelector(selecCryptowatchConfig);
-  const baseAsset = cryptowatchConfig.baseAsset;
-  const quoteAssets = cryptowatchConfig.quoteAssets;
-  const currencyOptions = quoteAssets.map((quoteAsset: string) => ({
-    displayName: `${quoteAsset.toUpperCase()} / ${baseAsset.toUpperCase()}`,
-    value: `${quoteAsset}_${baseAsset}`,
+  const krakenConfig = useSelector(selecKrakenConfig);
+  const baseAsset = krakenConfig.baseAsset;
+  const quoteAssets = krakenConfig.quoteAssets;
+  const currencyOptions = quoteAssets.map((quoteAsset: { symbol: string; altname: string }) => ({
+    displayName: `${quoteAsset.altname} / ${baseAsset.altname}`,
+    value: `${quoteAsset.symbol}_${baseAsset.symbol}`,
   }));
 
   const dispatch = useDispatch();
