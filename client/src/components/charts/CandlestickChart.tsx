@@ -56,8 +56,8 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ data }) => {
           theme: false,
         },
         labels: {
-          minWidth: 43,
-          maxWidth: 43,
+          minWidth: 48,
+          maxWidth: 48,
           formatter: (val: number) => {
             return val.toFixed(0);
           },
