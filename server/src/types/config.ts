@@ -1,4 +1,4 @@
-export interface CryptowatchConfig {
+export interface KrakenConfig {
   apiUrl: string;
   baseAsset: {
     symbol: string;

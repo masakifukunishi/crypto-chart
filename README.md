@@ -51,10 +51,10 @@ ApexCharts is utilized for rendering candlestick and volume charts.
 Vite is the tool used for building the frontend.
 
 ### MongoDB
-MongoDB is employed to store OHLCV data obtained from the Cryptowatch API and provide it upon server request.
+MongoDB is employed to store OHLCV data obtained from the Kraken API and provide it upon server request.
 
 ### node-cron
-node-cron is employed to regularly retrieve OHLCV data from the Cryptowatch API and store it in MongoDB.
+node-cron is employed to regularly retrieve OHLCV data from the Kraken API and store it in MongoDB.
 
 ## Architecture
 ![architecture](https://github.com/masakifukunishi/crypto-chart/assets/42294938/5391630f-3900-4632-a773-34629eab91f2)
@@ -78,7 +78,7 @@ If you want to change the asset pairs, change the settings in server/config/defa
 
 ```json
 {
-  "cryptowatch": {
+  "kraken": {
     ...
     "baseAsset": {
       "symbol": "ZUSD",

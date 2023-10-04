@@ -1,6 +1,6 @@
 import config from "config";
 
-import { CryptowatchConfig } from "../types/config.js";
+import { KrakenConfig } from "../types/config.js";
 import Ohlcv from "../models/ohlcv.js";
 import { CHART_CONSTANT } from "../constants/chart.js";
 
@@ -14,18 +14,18 @@ interface DateRange {
 }
 
 export default class OhlcvService {
-  private cryptowatchConfig: CryptowatchConfig;
+  private krakenConfig: KrakenConfig;
   private period: string;
   private currencyPair: string;
 
   constructor(period: string, currencyPair: string) {
-    this.cryptowatchConfig = config.get("cryptowatch");
+    this.krakenConfig = config.get("kraken");
     this.period = period || CHART_CONSTANT.CHART_PERIOD.ONE_YEAR.value;
     this.currencyPair = currencyPair || this.getDefaultCurrencyPair();
   }
 
   getDefaultCurrencyPair(): string {
-    return `${this.cryptowatchConfig.quoteAssets[0].symbol}_${this.cryptowatchConfig.baseAsset.symbol}`;
+    return `${this.krakenConfig.quoteAssets[0].symbol}_${this.krakenConfig.baseAsset.symbol}`;
   }
 
   async getChartData(): Promise<FormattedChartData> {

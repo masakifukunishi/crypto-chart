@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import configsApi from "../api/configs";
-import { setCryptowatchConfig, initializeCryptowatchConfig } from "../store/slicers/config";
+import { setKrakenConfig, initializeKrakenConfig } from "../store/slicers/config";
 
 const useConfigs = (configType: string): void => {
   const dispatch = useDispatch();
@@ -9,9 +9,9 @@ const useConfigs = (configType: string): void => {
   useEffect(() => {
     const fetchConfigs = async () => {
       try {
-        if (configType === "cryptowatch") {
-          const _cryptowatchConfigs = await configsApi.getCryptowatch();
-          dispatch(setCryptowatchConfig(_cryptowatchConfigs));
+        if (configType === "kraken") {
+          const _krakenConfigs = await configsApi.getKraken();
+          dispatch(setKrakenConfig(_krakenConfigs));
         }
       } catch (error) {
         console.error("Error fetching configs:", error);
@@ -19,7 +19,7 @@ const useConfigs = (configType: string): void => {
     };
     fetchConfigs();
     return () => {
-      dispatch(initializeCryptowatchConfig());
+      dispatch(initializeKrakenConfig());
     };
   }, [dispatch, configType]);
 

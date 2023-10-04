@@ -2,11 +2,11 @@ import axios from "axios";
 import config from "config";
 import { Model } from "mongoose";
 
-import { CryptowatchConfig } from "../../../types/config.js";
+import { KrakenConfig } from "../../../types/config.js";
 import Ohlcv, { OhlcvDocument } from "../../../models/ohlcv.js";
 
-class CryptowatchOhlcv {
-  private cryptowatchConfig: CryptowatchConfig;
+class KrakenOhlcv {
+  private krakenConfig: KrakenConfig;
   private period: number;
   private quoteAsset: string;
   private baseAsset: string;
@@ -16,13 +16,13 @@ class CryptowatchOhlcv {
   private ohlcvModel: Model<OhlcvDocument>;
 
   constructor(quoteAsset: string, baseAsset: string, dataLimit: number) {
-    this.cryptowatchConfig = config.get("cryptowatch");
-    this.period = this.cryptowatchConfig.period.daily;
+    this.krakenConfig = config.get("kraken");
+    this.period = this.krakenConfig.period.daily;
     this.quoteAsset = quoteAsset;
     this.baseAsset = baseAsset;
     this.pair = `${this.quoteAsset}${this.baseAsset}`;
     this.dataLimit = dataLimit;
-    this.url = `${this.cryptowatchConfig.apiUrl}/0/public/OHLC?pair=${this.pair}`;
+    this.url = `${this.krakenConfig.apiUrl}/0/public/OHLC?pair=${this.pair}`;
     console.log(this.url);
     this.ohlcvModel = Ohlcv(`kraken_ohlcv_${this.quoteAsset}_${this.baseAsset}`);
   }
@@ -39,7 +39,7 @@ class CryptowatchOhlcv {
         console.log(data);
         const formattedData = data.map((d: number[]) => {
           return {
-            // Cryptowatch API returns time in seconds, but we want milliseconds
+            // Kraken API returns time in seconds, but we want milliseconds
             closeTime: d[0] * 1000,
             // 1 day ago
             targetTime: (d[0] - 24 * 60 * 60) * 1000,
@@ -81,4 +81,4 @@ class CryptowatchOhlcv {
   }
 }
 
-export default CryptowatchOhlcv;
+export default KrakenOhlcv;

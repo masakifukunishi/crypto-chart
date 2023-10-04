@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 const initialState = {
-  cryptowatch: {
+  kraken: {
     apiUrl: "",
     baseAsset: {
       symbol: "",
@@ -27,17 +27,17 @@ const configSlice = createSlice({
   name: "config",
   initialState,
   reducers: {
-    setCryptowatchConfig: (state, action) => {
-      state.cryptowatch = action.payload;
+    setKrakenConfig: (state, action) => {
+      state.kraken = action.payload;
     },
-    initializeCryptowatchConfig: (state) => {
-      state.cryptowatch = initialState.cryptowatch;
+    initializeKrakenConfig: (state) => {
+      state.kraken = initialState.kraken;
     },
   },
 });
 
-export const { setCryptowatchConfig, initializeCryptowatchConfig } = configSlice.actions;
+export const { setKrakenConfig, initializeKrakenConfig } = configSlice.actions;
 
-export const selecCryptowatchConfig = (state: RootState) => state.config.cryptowatch;
+export const selecKrakenConfig = (state: RootState) => state.config.kraken;
 
 export default configSlice.reducer;

@@ -16,7 +16,7 @@ const Home: React.FC = () => {
 
   const ohlcv = useFetchOhlcvData(period, currencyPair);
   useFetchConstants("chart");
-  useFetchConfigs("cryptowatch");
+  useFetchConfigs("kraken");
 
   return (
     <div className="bg-gray-900 text-gray-50 min-h-screen py-1 px-3">
