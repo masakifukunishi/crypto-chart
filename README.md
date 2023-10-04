@@ -8,7 +8,7 @@
 Crypto Chart is a full-stack [MERN](https://www.geeksforgeeks.org/mern-stack/) app that lets users view candlestick charts of cryptocurrencies for selected asset pairs and periods.
 
 ## About Settings
-- Data is retrieved every 6 hours from Cryotowatch
+- Data is retrieved every 6 hours from kraken REST API and stored in MongoDB
 - You can change the asset pairs by changing the settings in config/default.json
 - Only UTC Time Zone is supported for now
 
@@ -57,7 +57,7 @@ MongoDB is employed to store OHLCV data obtained from the Kraken API and provide
 node-cron is employed to regularly retrieve OHLCV data from the Kraken API and store it in MongoDB.
 
 ## Architecture
-![architecture](https://github.com/masakifukunishi/crypto-chart/assets/42294938/5391630f-3900-4632-a773-34629eab91f2)
+![architecture](https://github.com/masakifukunishi/crypto-chart/assets/42294938/dd8d3c97-c1e0-4d06-b038-c6a14fffe872)
 
 ## How to run
 ### 1. Clone this repository
@@ -88,6 +88,10 @@ If you want to change the asset pairs, change the settings in server/config/defa
       {
         "symbol": "XETH",
         "altname": "ETH"
+      },
+      {
+        "symbol": "XXRP",
+        "altname": "XRP"
       }
     ],
     ...
