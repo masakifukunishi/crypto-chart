@@ -1,6 +1,7 @@
 {
   "kraken": {
     "apiUrl": "https://api.kraken.com",
+    "wsUrl": "wss://ws.kraken.com",
     "baseAsset": {
       "symbol": "ZUSD",
       "altname": "USD"
@@ -9,14 +10,9 @@
       {
         "symbol": "XETH",
         "altname": "ETH"
-      },
-      {
-        "symbol": "XXRP",
-        "altname": "XRP"
       }
     ],
     "initDataNum": 365,
-    "dailyDataNum": 1,
     "period": {
       "daily": 1440
     }
