@@ -3,7 +3,7 @@ import cron from "node-cron";
 
 import db from "../helpers/mongodb.js";
 import { KrakenConfig } from "../types/config.js";
-import KrakenOhlcv from "./lib/kraken/ohlcv.js";
+import KrakenOhlcv from "../libs/kraken/ohlcv.js";
 
 const processData = async () => {
   try {

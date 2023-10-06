@@ -2,8 +2,8 @@ import axios from "axios";
 import config from "config";
 import { Model } from "mongoose";
 
-import { KrakenConfig } from "../../../types/config.js";
-import Ohlcv, { OhlcvDocument } from "../../../models/ohlcv.js";
+import { KrakenConfig } from "../../types/config.js";
+import Ohlcv, { OhlcvDocument } from "../../models/ohlcv.js";
 
 class KrakenOhlcv {
   private krakenConfig: KrakenConfig;
