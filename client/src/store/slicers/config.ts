@@ -5,6 +5,7 @@ import { RootState } from "../store";
 const initialState = {
   kraken: {
     apiUrl: "",
+    wsUrl: "",
     baseAsset: {
       symbol: "",
       altname: "",
@@ -16,7 +17,6 @@ const initialState = {
       },
     ],
     initDataNum: 0,
-    dailyDataNum: 0,
     period: {
       daily: 0,
     },
