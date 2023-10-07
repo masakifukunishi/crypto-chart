@@ -76,21 +76,6 @@ class KrakenOhlcv {
     }
   }
 
-  async updatePreviousData(data: OhlcvData): Promise<void> {
-    const previousData = await this.ohlcvModel.findOne({ targetTime: data.targetTime });
-    if (previousData) {
-      await this.ohlcvModel.findOneAndUpdate({ targetTime: previousData.targetTime }, { $set: data });
-    }
-  }
-
-  async findDataByTime(targetTime: number): Promise<OhlcvData | null> {
-    return this.ohlcvModel.findOne({ targetTime });
-  }
-
-  async updateDataByTime(targetTime: number, newData: OhlcvData): Promise<OhlcvData | null> {
-    return this.ohlcvModel.findOneAndUpdate({ targetTime }, { $set: newData }, { new: true });
-  }
-
   setupWebSocket(): void {
     const ws = new WebSocket(this.wsUrl);
     ws.on("open", () => {
