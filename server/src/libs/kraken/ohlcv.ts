@@ -104,7 +104,6 @@ class KrakenOhlcv {
           close: parseFloat(data[1][5]),
           volume: parseFloat(data[1][6]),
         };
-        console.log(formattedData);
         this.upsert(formattedData);
       }
     });
