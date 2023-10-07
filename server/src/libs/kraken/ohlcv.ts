@@ -69,13 +69,7 @@ class KrakenOhlcv {
 
   async upsert(data: OhlcvData): Promise<void> {
     try {
-      await this.ohlcvModel.updateOne(
-        {
-          targetTime: data.targetTime,
-        },
-        data,
-        { upsert: true }
-      );
+      await this.ohlcvModel.findOneAndUpdate({ targetTime: data.targetTime }, { $set: data }, { upsert: true });
     } catch (error) {
       console.log(error);
       console.log("Error upserting data");
@@ -85,7 +79,7 @@ class KrakenOhlcv {
   async updatePreviousData(data: OhlcvData): Promise<void> {
     const previousData = await this.ohlcvModel.findOne({ targetTime: data.targetTime });
     if (previousData) {
-      await this.ohlcvModel.findOneAndUpdate({ targetTime: previousData.targetTime }, { $set: data }, { new: true });
+      await this.ohlcvModel.findOneAndUpdate({ targetTime: previousData.targetTime }, { $set: data });
     }
   }
 
@@ -125,6 +119,7 @@ class KrakenOhlcv {
           close: parseFloat(data[1][5]),
           volume: parseFloat(data[1][6]),
         };
+        console.log(formattedData);
         this.upsert(formattedData);
       }
     });
