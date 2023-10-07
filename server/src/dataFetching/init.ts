@@ -11,13 +11,13 @@ const processData = async () => {
   const krakenConfig: KrakenConfig = config.get("kraken");
   const quoteAssets = krakenConfig.quoteAssets;
   const baseAsset = krakenConfig.baseAsset;
-  const initDataNum = krakenConfig.initDataNum;
+  const dataNum = krakenConfig.dataNum;
 
   try {
     await Promise.all(
       quoteAssets.map(async (quoteAsset: { symbol: string; altname: string }) => {
         const ohlcv = new KrakenOhlcv(quoteAsset, baseAsset);
-        const data = await ohlcv.get(initDataNum);
+        const data = await ohlcv.get(dataNum);
         await ohlcv.insert(data);
       })
     );

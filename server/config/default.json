@@ -16,7 +16,7 @@
         "altname": "XRP"
       }
     ],
-    "initDataNum": 365,
+    "dataNum": 365,
     "period": {
       "daily": 1440
     }
