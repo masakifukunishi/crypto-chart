@@ -1,5 +1,6 @@
 export interface KrakenConfig {
   apiUrl: string;
+  wsUrl: string;
   baseAsset: {
     symbol: string;
     altname: string;
@@ -9,7 +10,6 @@ export interface KrakenConfig {
     altname: string;
   }[];
   initDataNum: number;
-  dailyDataNum: number;
   period: {
     daily: number;
   };

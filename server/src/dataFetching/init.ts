@@ -2,11 +2,11 @@ import config from "config";
 
 import db from "../helpers/mongodb.js";
 import { KrakenConfig } from "../types/config.js";
-import KrakenOhlcv from "./lib/kraken/ohlcv.js";
+import KrakenOhlcv from "../libs/kraken/ohlcv.js";
 
 const processData = async () => {
   console.log("init batch started");
-  db.connect();
+  await db.connect();
 
   const krakenConfig: KrakenConfig = config.get("kraken");
   const quoteAssets = krakenConfig.quoteAssets;
@@ -16,8 +16,8 @@ const processData = async () => {
   try {
     await Promise.all(
       quoteAssets.map(async (quoteAsset: { symbol: string; altname: string }) => {
-        const ohlcv = new KrakenOhlcv(quoteAsset.symbol, baseAsset.symbol, initDataNum);
-        const data = await ohlcv.get();
+        const ohlcv = new KrakenOhlcv(quoteAsset, baseAsset);
+        const data = await ohlcv.get(initDataNum);
         await ohlcv.insert(data);
       })
     );

@@ -9,6 +9,15 @@ export interface OhlcvDocument extends Document {
   volume: number;
 }
 
+export interface OhlcvData {
+  targetTime: number;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+}
+
 const OhlcvSchema = new Schema<OhlcvDocument>({
   targetTime: {
     type: Number,
@@ -36,7 +45,6 @@ const OhlcvSchema = new Schema<OhlcvDocument>({
   },
 });
 
-// Ohlcv モデルを定義してエクスポート
 const Ohlcv: (collectionName: string) => Model<OhlcvDocument> = (collectionName: string) =>
   model<OhlcvDocument>("Ohlcv", OhlcvSchema, collectionName);
 
