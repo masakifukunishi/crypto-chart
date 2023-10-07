@@ -8,7 +8,7 @@ const krakenConfig: KrakenConfig = config.get("kraken");
 const quoteAssets = krakenConfig.quoteAssets;
 const baseAsset = krakenConfig.baseAsset;
 
-db.connect();
+await db.connect();
 quoteAssets.forEach((quoteAsset) => {
   const ohlcv = new KrakenOhlcv(quoteAsset, baseAsset);
   ohlcv.setupWebSocket();

@@ -12,18 +12,14 @@ class Database {
     this.mongoose = mongoose;
   }
 
-  public connect() {
-    this.mongoose.connect(mongodbUri, { useNewUrlParser: true, useUnifiedTopology: true } as ConnectOptions);
-
-    const db = this.mongoose.connection;
-
-    db.once("error", (err) => {
-      console.error("Mongo DB connection error: ", err);
-    });
-
-    db.once("open", () => {
+  public async connect() {
+    try {
+      console.log("Connecting to MongoDB...");
+      await this.mongoose.connect(mongodbUri, { useNewUrlParser: true, useUnifiedTopology: true } as ConnectOptions);
       console.log("Mongo DB connected successfully");
-    });
+    } catch (error) {
+      console.error("Error connecting to MongoDB: ", error);
+    }
   }
 
   public close() {

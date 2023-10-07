@@ -7,10 +7,10 @@
     "build": "tsc",
     "dev": "nodemon --esm src/app.ts",
     "serve": "node dist/app.js",
-    "batch-init": "node dist/batch/init.js",
-    "batch-update": "node dist/batch/update.js",
-    "dev-batch-init": "npx ts-node --esm src/batch/init.ts",
-    "dev-batch-update": "npx ts-node --esm src/batch/update.ts",
+    "batch-init": "node dist/dataFetching/init.js",
+    "batch-update": "node dist/dataFetching/update.js",
+    "dev-batch-init": "npx ts-node --esm src/dataFetching/init.ts",
+    "dev-batch-update": "npx ts-node --esm src/dataFetching/update.ts",
     "lint": "eslint ./src --ext .ts"
   },
   "dependencies": {

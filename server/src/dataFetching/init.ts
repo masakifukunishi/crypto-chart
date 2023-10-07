@@ -6,7 +6,7 @@ import KrakenOhlcv from "../libs/kraken/ohlcv.js";
 
 const processData = async () => {
   console.log("init batch started");
-  db.connect();
+  await db.connect();
 
   const krakenConfig: KrakenConfig = config.get("kraken");
   const quoteAssets = krakenConfig.quoteAssets;

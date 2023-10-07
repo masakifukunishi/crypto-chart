@@ -11,7 +11,7 @@ const port: number = Number(process.env.PORT) || 8080;
 process.env.TZ = "UTC";
 
 // connect to MongoDB
-db.connect();
+await db.connect();
 
 app.use(express.static("../client/dist"));
 
