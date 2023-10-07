@@ -16,8 +16,8 @@ const processData = async () => {
   try {
     await Promise.all(
       quoteAssets.map(async (quoteAsset: { symbol: string; altname: string }) => {
-        const ohlcv = new KrakenOhlcv(quoteAsset.symbol, baseAsset.symbol, initDataNum);
-        const data = await ohlcv.get();
+        const ohlcv = new KrakenOhlcv(quoteAsset, baseAsset);
+        const data = await ohlcv.get(initDataNum);
         await ohlcv.insert(data);
       })
     );

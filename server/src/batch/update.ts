@@ -14,8 +14,8 @@ const processData = async () => {
 
     await Promise.all(
       quoteAssets.map(async (quoteAsset: { symbol: string; altname: string }) => {
-        const ohlcv = new KrakenOhlcv(quoteAsset.symbol, baseAsset.symbol, 2);
-        const data = await ohlcv.get();
+        const ohlcv = new KrakenOhlcv(quoteAsset, baseAsset);
+        const data = await ohlcv.get(2);
         // Reverse the data so that the most recent data is first
         const reversedData = data.reverse();
         const existingData = await ohlcv.findDataByCloseTime(reversedData[0].targetTime);
