@@ -4,7 +4,7 @@ import WebSocket from "ws";
 import { Model } from "mongoose";
 
 import { KrakenConfig } from "../../types/config.js";
-import Ohlcv, { OhlcvDocument } from "../../models/ohlcv.js";
+import Ohlcv, { OhlcvDocument, OhlcvData } from "../../models/ohlcv.js";
 
 interface Asset {
   symbol: string;
@@ -30,7 +30,7 @@ class KrakenOhlcv {
     this.ohlcvModel = Ohlcv(`ohlcv_${this.quoteAsset.symbol}_${this.baseAsset.symbol}`);
   }
 
-  async get(num: number): Promise<OhlcvDocument[]> {
+  async get(num: number): Promise<OhlcvData[]> {
     return axios
       .get(this.url, {
         params: {
@@ -58,7 +58,7 @@ class KrakenOhlcv {
       });
   }
 
-  async insert(data: OhlcvDocument | OhlcvDocument[]): Promise<void> {
+  async insert(data: OhlcvData | OhlcvData[]): Promise<void> {
     try {
       await this.ohlcvModel.insertMany(data);
     } catch (error) {
@@ -67,18 +67,33 @@ class KrakenOhlcv {
     }
   }
 
-  async updatePreviousData(data: OhlcvDocument): Promise<void> {
+  async upsert(data: OhlcvData): Promise<void> {
+    try {
+      await this.ohlcvModel.updateOne(
+        {
+          targetTime: data.targetTime,
+        },
+        data,
+        { upsert: true }
+      );
+    } catch (error) {
+      console.log(error);
+      console.log("Error upserting data");
+    }
+  }
+
+  async updatePreviousData(data: OhlcvData): Promise<void> {
     const previousData = await this.ohlcvModel.findOne({ targetTime: data.targetTime });
     if (previousData) {
       await this.ohlcvModel.findOneAndUpdate({ targetTime: previousData.targetTime }, { $set: data }, { new: true });
     }
   }
 
-  async findDataByCloseTime(targetTime: number): Promise<OhlcvDocument | null> {
+  async findDataByTime(targetTime: number): Promise<OhlcvData | null> {
     return this.ohlcvModel.findOne({ targetTime });
   }
 
-  async updateDataByCloseTime(targetTime: number, newData: OhlcvDocument): Promise<OhlcvDocument | null> {
+  async updateDataByTime(targetTime: number, newData: OhlcvData): Promise<OhlcvData | null> {
     return this.ohlcvModel.findOneAndUpdate({ targetTime }, { $set: newData }, { new: true });
   }
 
@@ -100,8 +115,17 @@ class KrakenOhlcv {
 
     ws.on("message", (message) => {
       const data = JSON.parse(message.toString());
-      if (data.event !== "heartbeat") {
-        console.log(data);
+      if (Array.isArray(data)) {
+        const formattedData: OhlcvData = {
+          // 1 day ago
+          targetTime: (parseInt(data[1][1]) - 24 * 60 * 60) * 1000,
+          open: parseFloat(data[1][2]),
+          high: parseFloat(data[1][3]),
+          low: parseFloat(data[1][4]),
+          close: parseFloat(data[1][5]),
+          volume: parseFloat(data[1][6]),
+        };
+        this.upsert(formattedData);
       }
     });
 
