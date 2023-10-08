@@ -38,7 +38,8 @@ Crypto Chart is a full-stack [MERN](https://www.geeksforgeeks.org/mern-stack/) a
     - MongoDB
     - mongoose
     - ws (WebSocket)
-    - Kraken REST API, Kraken WebSockets API
+    - Kraken REST API
+    - Kraken WebSockets API
 
 ### React
 Components are divided by feature, and data is fetched from the server side with custom hooks.
@@ -59,7 +60,7 @@ MongoDB is used to store OHLCV data obtained from the Kraken API and provide it 
 Websocket is used to get OHLCV data from the exchange
 
 ## Architecture
-![architecture](https://github.com/masakifukunishi/crypto-chart/assets/42294938/dd8d3c97-c1e0-4d06-b038-c6a14fffe872)
+![architecture](https://github.com/masakifukunishi/crypto-chart/assets/42294938/eb1d32c1-3dce-488c-897b-3ae2cd53e993)
 
 ## How to run
 ### 1. Clone this repository
