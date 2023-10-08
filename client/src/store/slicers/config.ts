@@ -16,7 +16,7 @@ const initialState = {
         altname: "",
       },
     ],
-    initDataNum: 0,
+    dataNum: 0,
     period: {
       daily: 0,
     },

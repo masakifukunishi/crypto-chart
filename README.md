@@ -1,5 +1,5 @@
 # Crypto Chart
-![home-screenshot](https://github.com/masakifukunishi/crypto-chart/assets/42294938/ab5fb783-fff8-48fd-a4fd-a5257421486d)
+![home-screenshot](https://github.com/masakifukunishi/crypto-chart/assets/42294938/90eeb254-a569-48fc-ab90-15a5ee57791f)
 
 ## Demo
 [https://crypto-chart-1r7g.onrender.com](https://crypto-chart-1r7g.onrender.com/)
@@ -8,18 +8,18 @@
 Crypto Chart is a full-stack [MERN](https://www.geeksforgeeks.org/mern-stack/) app that lets users view candlestick charts of cryptocurrencies for selected asset pairs and periods.
 
 ## About Settings
-- Data is retrieved every 6 hours from Kraken REST API
-- You can change the asset pairs by changing the settings in config/default.json
+- You can change the asset pairs and candlestick period by changing the settings in config/default.json
+- The default settings are ETH/USD, XRP/USD as currency pairs and candlesticks are daily
 - Only UTC Time Zone is supported for now
 
 ## Motivation
-1. Demonstrating my development skills
+1. To prove my skills
 
-      This app is built using TypeScript for the language, React and Redux for the frontend, Tailwind CSS for styling, and Express with Node.js for the backend. Additionally, I've implemented batch processing using node-cron. I believe this project effectively demonstrates my skills.
+      Both the client and server sides are written in TypeScript, and the code is checked by ESLint. Each responsibility is properly separated in the code, which makes the code easy to understand and maintain. I believe this project will allow me to prove my skills.
 
 2. Expandable and Practical
 
-      While the app currently offers basic functionality, there is potential to enhance its practicality by incorporating features such as acquiring candlestick data for shorter periods, integrating technical indicators, and more.
+      Currently only basic functions are implemented, but I believe that with support for other exchanges and the addition of technical indicators, it will become a practical application.
 
 ## Language and Libraries
 
@@ -35,29 +35,32 @@ Crypto Chart is a full-stack [MERN](https://www.geeksforgeeks.org/mern-stack/) a
     - TypeScript
     - Express
     - Node.js
-    - MongoDB (mongoose)
-    - node-cron
+    - MongoDB
+    - mongoose
+    - ws (WebSocket)
+    - Kraken REST API
+    - Kraken WebSockets API
 
 ### React
-Data fetching from the backend in React is facilitated using custom hooks, making it explicit when the API is called.
+Components are divided by feature, and data is fetched from the server side with custom hooks.
 
 ### Redux
 The selected asset pair and period are stored in the Redux store. Upon accessing the home screen, configuration and constant data are fetched from the server side and stored in Redux.
 
 ### ApexCharts
-ApexCharts is utilized for rendering candlestick and volume charts.
+ApexCharts is used to render candlestick and volume charts.
 
 ### Vite
-Vite is the tool used for building the frontend.
+Vite is the tool used for building the client side.
 
 ### MongoDB
-MongoDB is employed to store OHLCV data obtained from the Kraken API and provide it upon server request.
+MongoDB is used to store OHLCV data obtained from the Kraken API and provide it upon server request.
 
-### node-cron
-node-cron is employed to regularly retrieve OHLCV data from the Kraken API and store it in MongoDB.
+### ws (WebSocket)
+Websocket is used to get OHLCV data from the exchange
 
 ## Architecture
-![architecture](https://github.com/masakifukunishi/crypto-chart/assets/42294938/dd8d3c97-c1e0-4d06-b038-c6a14fffe872)
+![architecture](https://github.com/masakifukunishi/crypto-chart/assets/42294938/eb1d32c1-3dce-488c-897b-3ae2cd53e993)
 
 ## How to run
 ### 1. Clone this repository
@@ -74,12 +77,13 @@ cp server/.env.example server/.env
 `MONGODB_URI` is the URI of the MongoDB database to be used.
 
 ### 4. Set config
-If you want to change the asset pairs, change the settings in server/config/default.json.
+If you want to change the asset pairs or candlestick period, change the settings in server/config/default.json.
 
 ```json
 {
   "kraken": {
-    ...
+    "apiUrl": "https://api.kraken.com",
+    "wsUrl": "wss://ws.kraken.com",
     "baseAsset": {
       "symbol": "ZUSD",
       "altname": "USD"
@@ -94,19 +98,22 @@ If you want to change the asset pairs, change the settings in server/config/defa
         "altname": "XRP"
       }
     ],
-    ...
+    "dataNum": 365,
+    "period": {
+      "daily": 1440
+    }
   }
 }
 ```
 [server/config/default.json](server/config/default.json)
 
-For the list of asset pairs, see the following link.
+For the list of asset pairs, see the following API documentation.
 
 https://docs.kraken.com/rest/#tag/Market-Data/operation/getTradableAssetPairs
 
 ### 5. Run batch processing to register initial ohlcv data
 ```bash
-npm run dev-batch-init
+npm run dev-initialize-data
 ```
 
 ### 6. Run frontend and backend

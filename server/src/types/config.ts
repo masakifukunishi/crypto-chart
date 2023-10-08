@@ -9,7 +9,7 @@ export interface KrakenConfig {
     symbol: string;
     altname: string;
   }[];
-  initDataNum: number;
+  dataNum: number;
   period: {
     daily: number;
   };
