@@ -30,6 +30,7 @@ Crypto Chart is a full-stack [MERN](https://www.geeksforgeeks.org/mern-stack/) a
     - Tailwind CSS
     - ApexCharts
     - Vite
+    - ESLint
 
 - Server
     - TypeScript
@@ -40,6 +41,7 @@ Crypto Chart is a full-stack [MERN](https://www.geeksforgeeks.org/mern-stack/) a
     - ws (WebSocket)
     - Kraken REST API
     - Kraken WebSockets API
+    - ESLint
 
 ### React
 Components are divided by feature, and data is fetched from the server side with custom hooks.
