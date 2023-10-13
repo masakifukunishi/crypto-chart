@@ -1,6 +1,5 @@
 import config from "config";
-import { Schema, Model } from "mongoose";
-import { ChangeStreamInsertDocument, ChangeStreamUpdateDocument } from "mongodb";
+import { Model } from "mongoose";
 
 import { KrakenConfig } from "../types/config.js";
 import Ohlcv, { OhlcvDocument } from "../models/ohlcv.js";
