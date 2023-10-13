@@ -24,6 +24,9 @@ const VolumeBarChart: React.FC<VolumeBarChartProps> = ({ data }) => {
         toolbar: {
           show: false,
         },
+        animations: {
+          enabled: false,
+        },
       },
       dataLabels: {
         enabled: false,

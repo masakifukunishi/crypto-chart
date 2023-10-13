@@ -1,27 +1,25 @@
 import { useState, useEffect } from "react";
-import ohlcvApi from "../api/ohlcv";
 
-interface OhlcvData {
-  ohlc: { x: number; y: number[] }[];
-  volume: { x: number; y: number }[];
-}
-
-const useFetchOhlcvData = (period: string, currencyPair: string): OhlcvData => {
+const useWebSocket = (period, currencyPair) => {
   const [ohlcv, setOhlcv] = useState({ ohlc: [], volume: [] });
 
   useEffect(() => {
-    const fetchOhlcvData = async () => {
-      try {
-        const _ohlcv = await ohlcvApi.get(period, currencyPair);
-        setOhlcv(_ohlcv);
-      } catch (error) {
-        console.error("Error fetching ohlcv data:", error);
-      }
+    const socket = new WebSocket("ws://localhost:8081");
+
+    socket.onopen = () => {
+      socket.send(JSON.stringify({ period, currencyPair }));
     };
-    fetchOhlcvData();
+
+    socket.onmessage = (event: any) => {
+      setOhlcv(JSON.parse(event.data));
+    };
+
+    return () => {
+      socket.close();
+    };
   }, [period, currencyPair]);
 
   return ohlcv;
 };
 
-export default useFetchOhlcvData;
+export default useWebSocket;

@@ -1,15 +1,20 @@
-import { Request, Response } from "express";
-
 import OhlcvService from "../services/ohlcvService.js";
 
-export const getOhlcv = async (req: Request, res: Response): Promise<void> => {
-  const { period, currencyPair } = req.query;
-
+export const getOhlcv = async (period: string, currencyPair: string): Promise<any> => {
   try {
     const ohlcvServiceInstance = new OhlcvService(period as string, currencyPair as string);
     const formattedChartData = await ohlcvServiceInstance.getChartData();
-    res.json(formattedChartData);
+    return formattedChartData;
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    console.log(error);
+  }
+};
+
+export const watchOhlcv = async (period: string, currencyPair: string, callback: any): Promise<void> => {
+  try {
+    const ohlcvServiceInstance = new OhlcvService(period as string, currencyPair as string);
+    ohlcvServiceInstance.watchModelAndGetChartData(callback);
+  } catch (error) {
+    console.log(error);
   }
 };

@@ -1,7 +1,9 @@
 import path from "path";
 import express, { Express, Request, Response, NextFunction } from "express";
+import { WebSocketServer } from "ws";
 
 import apiRoutes from "./api-routes/index.js";
+import { ohlcvWebSocketConnection } from "./websockets/index.js";
 import db from "./helpers/mongodb.js";
 
 const app: Express = express();
@@ -35,3 +37,6 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction): void =>
 app.listen(port, () => {
   console.log(`Server start: http://localhost:${port}`);
 });
+
+const wss = new WebSocketServer({ port: Number(process.env.WS_PORT) || 8081 });
+wss.on("connection", ohlcvWebSocketConnection);

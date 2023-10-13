@@ -8,4 +8,9 @@ module.exports = {
   rules: {
     "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
   },
+  onfigureWebpack: {
+    resolve: {
+      mainFields: ["main", "browser"],
+    },
+  },
 };

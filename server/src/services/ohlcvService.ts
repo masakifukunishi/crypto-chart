@@ -1,7 +1,8 @@
 import config from "config";
+import { Schema, model, Document, Model } from "mongoose";
 
 import { KrakenConfig } from "../types/config.js";
-import Ohlcv from "../models/ohlcv.js";
+import Ohlcv, { OhlcvDocument } from "../models/ohlcv.js";
 import { CHART_CONSTANT } from "../constants/chart.js";
 
 interface FormattedChartData {
@@ -17,11 +18,15 @@ export default class OhlcvService {
   private krakenConfig: KrakenConfig;
   private period: string;
   private currencyPair: string;
+  private collectionName: string;
+  private ohlcvModel: Model<OhlcvDocument>;
 
   constructor(period: string, currencyPair: string) {
     this.krakenConfig = config.get("kraken");
     this.period = period || CHART_CONSTANT.CHART_PERIOD.ONE_YEAR.value;
     this.currencyPair = currencyPair || this.getDefaultCurrencyPair();
+    this.collectionName = this.generateCollectionName();
+    this.ohlcvModel = Ohlcv(this.collectionName);
   }
 
   getDefaultCurrencyPair(): string {
@@ -29,13 +34,13 @@ export default class OhlcvService {
   }
 
   async getChartData(): Promise<FormattedChartData> {
-    const collectionName = this.generateCollectionName();
-    const OhlcvModel = Ohlcv(collectionName);
     const { startDate, endDate } = this.calculateDateRange();
 
-    const ohlcvRecords = await OhlcvModel.find({
-      targetTime: { $gte: startDate, $lte: endDate },
-    }).sort({ targetTime: 1 });
+    const ohlcvRecords = await this.ohlcvModel
+      .find({
+        targetTime: { $gte: startDate, $lte: endDate },
+      })
+      .sort({ targetTime: 1 });
     const formattedOhlc = ohlcvRecords.map((record) => {
       return {
         x: record.targetTime,
@@ -100,5 +105,14 @@ export default class OhlcvService {
     }
 
     return { startDate, endDate };
+  }
+
+  watchModelAndGetChartData(callback: any): void {
+    this.ohlcvModel.watch().on("change", async (change) => {
+      console.log("change", change);
+
+      const formattedData = await this.getChartData();
+      callback(formattedData);
+    });
   }
 }
