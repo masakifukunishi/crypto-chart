@@ -114,6 +114,10 @@ class KrakenOhlcv {
 
     ws.on("close", (code, reason) => {
       console.log(`Closed with code ${code}: ${reason}`);
+      console.log("Reconnecting...");
+      setTimeout(() => {
+        this.setupWebSocket();
+      }, 3000);
     });
   }
 }
