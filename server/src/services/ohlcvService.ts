@@ -137,13 +137,13 @@ export default class OhlcvService {
       const updatedData = await this.getChartDataById(change.documentKey._id.toString());
       if (change.operationType === "insert") {
         const updatedOhlcv = {
-          ohlc: [...originalOhlcv.ohlc, updatedData.formattedOhlc],
-          volume: [...originalOhlcv.volume, updatedData.formattedVolume],
+          ohlc: [...originalOhlcv.ohlc, updatedData.ohlc],
+          volume: [...originalOhlcv.volume, updatedData.volume],
         };
         callback(updatedOhlcv);
       } else if (change.operationType === "update") {
-        originalOhlcv.ohlc[originalOhlcv.ohlc.length - 1] = updatedData.formattedOhlc;
-        originalOhlcv.volume[originalOhlcv.volume.length - 1] = updatedData.formattedVolume;
+        originalOhlcv.ohlc[originalOhlcv.ohlc.length - 1] = updatedData.ohlc;
+        originalOhlcv.volume[originalOhlcv.volume.length - 1] = updatedData.volume;
         callback(originalOhlcv);
       }
     });
