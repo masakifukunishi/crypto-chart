@@ -38,5 +38,11 @@ app.listen(port, () => {
   console.log(`Server start: http://localhost:${port}`);
 });
 
+// WebSocket server
 const wss = new WebSocketServer({ port: Number(process.env.WS_PORT) || 8081 });
-wss.on("connection", ohlcvWebSocketConnection);
+wss.on("listening", () => {
+  console.log(`WebSocket server is listening on port ${wss.options.port}`);
+});
+wss.on("connection", (socket) => {
+  ohlcvWebSocketConnection(socket);
+});

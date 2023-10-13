@@ -5,6 +5,7 @@ interface FormattedChartData {
   ohlc: { x: number; y: number[] }[];
   volume: { x: number; y: number }[];
 }
+
 export const ohlcvWebSocketConnection = (socket: WebSocket) => {
   socket.on("message", async (message: string) => {
     const { period, currencyPair } = JSON.parse(message);
