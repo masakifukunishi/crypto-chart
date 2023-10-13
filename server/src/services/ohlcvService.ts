@@ -1,5 +1,6 @@
 import config from "config";
-import { Schema, model, Document, Model } from "mongoose";
+import { Schema, Model } from "mongoose";
+import { ChangeStreamInsertDocument, ChangeStreamUpdateDocument } from "mongodb";
 
 import { KrakenConfig } from "../types/config.js";
 import Ohlcv, { OhlcvDocument } from "../models/ohlcv.js";
@@ -9,6 +10,12 @@ interface FormattedChartData {
   ohlc: { x: number; y: number[] }[];
   volume: { x: number; y: number }[];
 }
+
+interface formattedChartRecord {
+  ohlc: { x: number; y: number[] };
+  volume: { x: number; y: number };
+}
+
 interface DateRange {
   startDate: number;
   endDate: number;
@@ -41,13 +48,13 @@ export default class OhlcvService {
         targetTime: { $gte: startDate, $lte: endDate },
       })
       .sort({ targetTime: 1 });
+
     const formattedOhlc = ohlcvRecords.map((record) => {
       return {
         x: record.targetTime,
         y: [record.open, record.high, record.low, record.close],
       };
     });
-
     const formattedVolume = ohlcvRecords.map((record) => {
       return {
         x: record.targetTime,
@@ -61,6 +68,24 @@ export default class OhlcvService {
     };
 
     return formattedChartData;
+  }
+
+  async getChartDataById(id: string): Promise<formattedChartRecord> {
+    const ohlcvRecord = await this.ohlcvModel.findById(id);
+
+    if (!ohlcvRecord) {
+      throw new Error("Invalid id");
+    }
+    const ohlc = {
+      x: ohlcvRecord.targetTime,
+      y: [ohlcvRecord.open, ohlcvRecord.high, ohlcvRecord.low, ohlcvRecord.close],
+    };
+    const volume = {
+      x: ohlcvRecord.targetTime,
+      y: ohlcvRecord.volume,
+    };
+
+    return { ohlc, volume };
   }
 
   generateCollectionName(): string {
@@ -107,12 +132,20 @@ export default class OhlcvService {
     return { startDate, endDate };
   }
 
-  watchModelAndGetChartData(callback: any): void {
+  watchModel(originalOhlcv: FormattedChartData, callback: (ohlcv: FormattedChartData) => void): void {
     this.ohlcvModel.watch().on("change", async (change) => {
-      console.log("change", change);
-
-      const formattedData = await this.getChartData();
-      callback(formattedData);
+      const updatedData = await this.getChartDataById(change.documentKey._id.toString());
+      if (change.operationType === "insert") {
+        const updatedOhlcv = {
+          ohlc: [...originalOhlcv.ohlc, updatedData.formattedOhlc],
+          volume: [...originalOhlcv.volume, updatedData.formattedVolume],
+        };
+        callback(updatedOhlcv);
+      } else if (change.operationType === "update") {
+        originalOhlcv.ohlc[originalOhlcv.ohlc.length - 1] = updatedData.formattedOhlc;
+        originalOhlcv.volume[originalOhlcv.volume.length - 1] = updatedData.formattedVolume;
+        callback(originalOhlcv);
+      }
     });
   }
 }
