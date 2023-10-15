@@ -102,7 +102,7 @@ class KrakenOhlcv {
           high: parseFloat(data[1][3]),
           low: parseFloat(data[1][4]),
           close: parseFloat(data[1][5]),
-          volume: parseFloat(data[1][6]),
+          volume: parseFloat(data[1][7]),
         };
         this.upsert(formattedData);
       }
