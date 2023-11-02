@@ -1,4 +1,3 @@
-// src/store/chartSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
