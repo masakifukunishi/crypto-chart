@@ -24,7 +24,7 @@ export default class OhlcvService {
     this.currencyPair = currencyPair || this.getDefaultCurrencyPair();
   }
 
-  getDefaultCurrencyPair(): string {
+  private getDefaultCurrencyPair(): string {
     return `${this.krakenConfig.quoteAssets[0].symbol}_${this.krakenConfig.baseAsset.symbol}`;
   }
 
