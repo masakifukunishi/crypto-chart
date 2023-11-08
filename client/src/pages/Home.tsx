@@ -6,7 +6,7 @@ import SelectCurrency from "../components/charts/controls/select-currency";
 import CandlestickChart from "../components/charts/CandlestickChart";
 import VolumeBarChart from "../components/charts/VolumeBarChart";
 import { selectChartPeriod, selectCurrencyPair } from "../store/slicers/chart";
-import useFetchOhlcvData from "../hooks/useFetchOhlcvData";
+import useWebSocketsOhlcv from "../hooks/useWebsocketsOhlcvData";
 import useFetchConstants from "../hooks/useFetchConstants";
 import useFetchConfigs from "../hooks/useFetchConfigs";
 
@@ -14,7 +14,7 @@ const Home: React.FC = () => {
   const period = useSelector(selectChartPeriod);
   const currencyPair = useSelector(selectCurrencyPair);
 
-  const ohlcv = useFetchOhlcvData(period, currencyPair);
+  const ohlcv = useWebSocketsOhlcv(period, currencyPair);
   useFetchConstants("chart");
   useFetchConfigs("kraken");
 

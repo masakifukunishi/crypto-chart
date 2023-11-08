@@ -36,6 +36,9 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ data }) => {
         toolbar: {
           show: false,
         },
+        animations: {
+          enabled: false,
+        },
       },
       xaxis: {
         type: "datetime",
