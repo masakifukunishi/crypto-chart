@@ -12,7 +12,7 @@
     "install-server": "npm install --prefix server",
     "build-client": "npm run build --prefix client",
     "build-server": "npm run build --prefix server",
-    "initialize-data": "npm run initialize-data --prefix servenr",
+    "initialize-data": "npm run initialize-data --prefix server",
     "update-data": "npm run update-data --prefix server",
     "serve": "npm run serve --prefix server",
     "dev-server": "npm run dev --prefix server",
