@@ -1,13 +1,20 @@
 import config from "config";
+import { Model } from "mongoose";
 
 import { KrakenConfig } from "../types/config.js";
-import Ohlcv from "../models/ohlcv.js";
+import Ohlcv, { OhlcvDocument } from "../models/ohlcv.js";
 import { CHART_CONSTANT } from "../constants/chart.js";
 
 interface FormattedChartData {
   ohlc: { x: number; y: number[] }[];
   volume: { x: number; y: number }[];
 }
+
+interface formattedChartRecord {
+  ohlc: { x: number; y: number[] };
+  volume: { x: number; y: number };
+}
+
 interface DateRange {
   startDate: number;
   endDate: number;
@@ -17,11 +24,15 @@ export default class OhlcvService {
   private krakenConfig: KrakenConfig;
   private period: string;
   private currencyPair: string;
+  private collectionName: string;
+  private ohlcvModel: Model<OhlcvDocument>;
 
   constructor(period: string, currencyPair: string) {
     this.krakenConfig = config.get("kraken");
     this.period = period || CHART_CONSTANT.CHART_PERIOD.ONE_YEAR.value;
     this.currencyPair = currencyPair || this.getDefaultCurrencyPair();
+    this.collectionName = this.generateCollectionName();
+    this.ohlcvModel = Ohlcv(this.collectionName);
   }
 
   private getDefaultCurrencyPair(): string {
@@ -29,20 +40,20 @@ export default class OhlcvService {
   }
 
   async getChartData(): Promise<FormattedChartData> {
-    const collectionName = this.generateCollectionName();
-    const OhlcvModel = Ohlcv(collectionName);
     const { startDate, endDate } = this.calculateDateRange();
 
-    const ohlcvRecords = await OhlcvModel.find({
-      targetTime: { $gte: startDate, $lte: endDate },
-    }).sort({ targetTime: 1 });
+    const ohlcvRecords = await this.ohlcvModel
+      .find({
+        targetTime: { $gte: startDate, $lte: endDate },
+      })
+      .sort({ targetTime: 1 });
+
     const formattedOhlc = ohlcvRecords.map((record) => {
       return {
         x: record.targetTime,
         y: [record.open, record.high, record.low, record.close],
       };
     });
-
     const formattedVolume = ohlcvRecords.map((record) => {
       return {
         x: record.targetTime,
@@ -56,6 +67,24 @@ export default class OhlcvService {
     };
 
     return formattedChartData;
+  }
+
+  async getChartDataById(id: string): Promise<formattedChartRecord> {
+    const ohlcvRecord = await this.ohlcvModel.findById(id);
+
+    if (!ohlcvRecord) {
+      throw new Error("Invalid id");
+    }
+    const ohlc = {
+      x: ohlcvRecord.targetTime,
+      y: [ohlcvRecord.open, ohlcvRecord.high, ohlcvRecord.low, ohlcvRecord.close],
+    };
+    const volume = {
+      x: ohlcvRecord.targetTime,
+      y: ohlcvRecord.volume,
+    };
+
+    return { ohlc, volume };
   }
 
   generateCollectionName(): string {
@@ -100,5 +129,22 @@ export default class OhlcvService {
     }
 
     return { startDate, endDate };
+  }
+
+  watchModel(originalOhlcv: FormattedChartData, callback: (ohlcv: FormattedChartData) => void): void {
+    this.ohlcvModel.watch().on("change", async (change) => {
+      const updatedData = await this.getChartDataById(change.documentKey._id.toString());
+      if (change.operationType === "insert") {
+        const updatedOhlcv = {
+          ohlc: [...originalOhlcv.ohlc, updatedData.ohlc],
+          volume: [...originalOhlcv.volume, updatedData.volume],
+        };
+        callback(updatedOhlcv);
+      } else if (change.operationType === "update") {
+        originalOhlcv.ohlc[originalOhlcv.ohlc.length - 1] = updatedData.ohlc;
+        originalOhlcv.volume[originalOhlcv.volume.length - 1] = updatedData.volume;
+        callback(originalOhlcv);
+      }
+    });
   }
 }
