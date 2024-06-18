@@ -1,9 +1,6 @@
 # Crypto Chart
 ![home-screenshot](https://github.com/masakifukunishi/crypto-chart/assets/42294938/90eeb254-a569-48fc-ab90-15a5ee57791f)
 
-## Demo
-[https://crypto-chart-1r7g.onrender.com](https://crypto-chart-1r7g.onrender.com/)
-
 ## Summary
 Crypto Chart is a full-stack [MERN](https://www.geeksforgeeks.org/mern-stack/) app that lets users view candlestick charts of cryptocurrencies for selected asset pairs and periods.
 
