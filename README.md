@@ -64,6 +64,7 @@ Websocket is used to get OHLCV data from the exchange
 ![architecture](https://github.com/masakifukunishi/crypto-chart/assets/42294938/eb1d32c1-3dce-488c-897b-3ae2cd53e993)
 
 ## How to run
+***Note: Node version 20.15.1 is used in this project.***
 ### 1. Clone this repository
    
 ### 2. Install dependencies
